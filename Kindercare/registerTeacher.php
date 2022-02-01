@@ -97,7 +97,7 @@ body {
       <div class="checkbox mb-3">
         <label>
         <p >Already have an account?
-        <a href="/"><span style ="color:#151f28">Sign In here</span></a></p>
+        <a href="index.php"><span style ="color:#151f28">Sign In here</span></a></p>
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" name="save" type="submit">Register Here</button>

@@ -86,18 +86,7 @@ body {
     <form class="form-signin" method="POST" action="">
     
       <img class="mb-3" src="img/logo.png" alt="Logo" width="150" height="200">
-     <div class="alert alert-success alert-dismissible fade show" role="alert">
-     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-      </button>
-      </div>
-    
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+     
   
  
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -127,12 +116,7 @@ if(isset($_POST['submit']))
     $row  = mysqli_fetch_array($sql);
     if(is_array($row))
     {
-        
-        $_SESSION["emailAddress"]=$row['emailAddress'];
-        $_SESSION["teacherName"]=$row['teacherNumber'];
-        $_SESSION["firstName"]=$row['firstName'];
-        $_SESSION["lastName"]=$row['lastName'];
-        header("Location: studentview.php"); // taking an authorized user to their student view
+        header("Location: home.php"); // taking an authorized user to their student view
     }
     else
     {
