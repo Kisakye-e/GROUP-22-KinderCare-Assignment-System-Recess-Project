@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'database.php';
 if(isset($_POST['save']))
 {	 
@@ -11,12 +12,13 @@ if(isset($_POST['save']))
 	 $sql = "INSERT INTO pupils (userCode,firstName,lastName,phoneNumber,password)
 	 VALUES ('$userCode','$firstName','$lastName','$phoneNumber','$password')";
 	 if (mysqli_query($conn, $sql)) {
-		echo "Submitted for approval!";
-		header("Location:home.php");
+		$_SESSION['regstatus'] = "Pupil registered successfully";
+        header("Location: registerPupil.php");
 
-	 } else {
-		echo "Error: " . $sql . "
-" . mysqli_error($conn);
+	 } 
+	 else {
+		$_SESSION['regstatus'] = "Failed to register pupil, please try again.";
+        header("Location: registerPupil.php");
 	 }
 	 mysqli_close($conn);
 }
