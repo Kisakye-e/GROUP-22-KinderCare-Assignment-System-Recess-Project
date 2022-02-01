@@ -94,31 +94,7 @@
   </tbody>
 </table>
   
-  <script>
-    $(document).ready(function()
-    {
-      $("#pupil_table").DataTable()
-    });
-    $(function() {
-      $('.toggle-class').change(function(){
-        var activationStatus= $(this).prop('checked')== true ? 'Activated' : 'Deactivated';
-        var userCode = $(this).data('userCode');
-
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '/changeStatus',
-            data: {'activationStatus':activationStatus, 'userCode':userCode},
-            success: function(data){
-              console.log('Success')
-            }
-        });
-      });
-    });
-
-    
-  </script>
-
+ 
 <!-- <div class="container-fluid" id="display">
   <div class="row content">    
     <div class="col-sm-12">
