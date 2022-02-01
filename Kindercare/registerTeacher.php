@@ -1,4 +1,10 @@
 <!doctype html>
+
+<?php
+
+include_once 'database.php';
+
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -99,3 +105,31 @@ body {
     </form>
   </body>
 </html>
+
+
+
+<?php
+
+if(isset($_POST['save']))
+{	 
+	//extracting the values entered into the form 
+	 $emailAddress = $_POST['emailAddress'];
+	 $teacherNumber = $_POST['teacherNumber'];
+	 $firstName = $_POST['firstName'];
+	 $lastName = $_POST['lastName'];
+	 $password = $_POST['password'];
+	
+	
+	$sql = "INSERT INTO teachers (emailAddress,teacherNumber,firstName,lastName,password)
+	 VALUES ('$emailAddress','$teacherNumber','$firstName','$lastName','$password')";
+	 if (mysqli_query($conn, $sql)) {
+		echo "New record created successfully !";
+		header("Location: index.php"); 
+
+	 } else {
+		echo "Error: " . $sql . "
+" . mysqli_error($conn);
+	 }
+	 mysqli_close($conn);
+}
+?>
