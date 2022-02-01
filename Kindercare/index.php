@@ -106,21 +106,32 @@ body {
   </body>
 </html>
 
+
+
 <?php
-//session_start();
-if(isset($_POST['submit']))
-{
-    extract($_POST);
-    include 'database.php';
-    $sql=mysqli_query($conn,"SELECT * FROM teachers where teacherNumber='$teacherNumber' and password='$password'");//validating the details entered
-    $row  = mysqli_fetch_array($sql);
-    if(is_array($row))
-    {
-        header("Location: home.php"); // taking an authorized user to their student view
+include "database.php";
+
+if(isset($_POST['submit'])){
+
+    $teacherNumber = mysqli_real_escape_string($conn,$_POST['teacherNumber']);
+    $password = mysqli_real_escape_string($conn,$_POST['password']);
+
+    if ($teacherNumber != "" && $password != ""){
+
+        $sql_query = "select count(*) as cntUser from teachers where teacherNumber='".$teacherNumber."' and password='".$password."'";
+        $result = mysqli_query($conn,$sql_query);
+        $row = mysqli_fetch_array($result);
+
+        $count = $row['cntUser'];
+
+        if($count > 0){
+            $_SESSION['teacherNumber'] = $teacherNumber;
+            header('Location: home.php');
+        }else{
+            echo "Invalid username and password";
+        }
+
     }
-    else
-    {
-        echo "Invalid Email ID/Password";
-    }
+
 }
 ?>
