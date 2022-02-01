@@ -1,4 +1,12 @@
-<?php include_once 'layout.php';?>
+<?php session_start(); 
+
+include_once 'layout.php';
+
+?>
+<html>
+    <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+   
 <style>
 
 
@@ -36,7 +44,8 @@ td{
     
 }
 </style>
-
+</head>
+<body>
 <script>
     function printChar() {
                var items = document.getElementsByName("character[]");
@@ -65,10 +74,25 @@ td{
 </script>
 
 
-  <div class='child'>
+<div class='child'>
 </br>
-        <form action = "" method="POST">
+<div class="col-md-5">
+                <?php 
+                    if(isset($_SESSION['status']))
+                    {
+                        ?>
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <?php echo $_SESSION['status']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['status']);
+                    }
+                ?>
+</div>
+        <form action = "postAssignment.php" method="POST">
             <p style="font-size:25px;">SELECT CHARACTERS TO ADD TO THE ASSIGNMENT:</p>
+            
             <p id="char"></p>
             <br>
             <div class="tab">
@@ -114,10 +138,18 @@ td{
             </table>
             </div>
             <br>
-            <p>Teacher Code&emsp;<input type="text"></p></br></br>
-            <p>Start Date &emsp;<input type="Date">&emsp;&emsp;Start time&emsp;<input type="time"></p></br></br> 
-            <p>Close time &emsp;<input type="time">&emsp;&emsp; <button onclick="printChar()" name="submit" type="submit">Submit Assignment</button></br> </br>         
+            </br>
+            <p>Start Date &emsp;<input type="Date" name="startD">&emsp;&emsp;Start time&emsp;<input type="time" name="startT"></p></br></br> 
+            <p>Close time &emsp;<input type="time" name="closeT">&emsp;&emsp; <button onclick="printChar()" name="submit" type="submit">Submit Assignment</button></br> </br>         
         </form>
   </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
         
 
