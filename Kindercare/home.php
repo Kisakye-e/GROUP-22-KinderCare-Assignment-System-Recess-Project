@@ -1,5 +1,6 @@
 <?php include_once 'layout.php';
 include_once 'database.php';
+session_start(); 
 ?>
 <html>
 <head>
@@ -28,12 +29,7 @@ include_once 'database.php';
 
 <body>
     <div class="row" style="margin-top:40px;">
-        <!-- <div class="col-sm-3">
-          <div class="well">
-            <h4>Assignments</h4>
-            <p>1 Million</p> 
-          </div>
-        </div> -->
+        
         <div class="col-sm-4">
           <div class="well">
             <h4>Registered pupils</h4>
@@ -77,86 +73,33 @@ include_once 'database.php';
     </tr>
   </thead>
   <tbody>
-    @foreach($data as $item)
+    <?php 
+    $pupils = mysqli_query($conn,"select * from pupils"); 
+    while($data = mysqli_fetch_array($pupils))
+{
+?>
+
+   
     <tr>
-      <th scope="row"> {{$item -> userCode }}</th>
-      <td>{{$item -> firstName }}</td>
-      <td>{{$item -> lastName }}</td>
-      <td>{{$item -> phoneNumber }}</td>
+      <td scope="row"><?php echo $data['userCode']; ?></td>
+      <td><?php echo $data['firstName'];?></td>
+      <td><?php echo $data['lastName']; ?></td>
+      <td><?php echo $data['phoneNumber']; ?></td>
       <td>
 
         <input data-id="{{$item->userCode}}" class="toggle-class" type="checkbox"  
         data-onstyle="success" 
-        data-offstyle="danger" data-toggle="toggle" data-on="Actived" data-off="Deactivated"
-       {{ $item -> activationStatus ? 'checked' : '' }}>
-       
+        data-offstyle="danger" data-toggle="toggle" data-on="Actived" data-off="Deactivated">   
   </td>
-    </tr>
-@endforeach
+  </tr>
+<?php
+}
+?>
+
   </tbody>
 </table>
-  
- 
-<!-- <div class="container-fluid" id="display">
-  <div class="row content">    
-    <div class="col-sm-12">
-      <div class="well">
-        <h4>Dashboard</h4>
-        <p>Some text..</p>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Assignments</h4>
-            <p>1 Million</p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Registered pupils</h4>
-            <p>100 Million</p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Deactivated Pupils</h4>
-            <p>10 Million</p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Pending Activation Requests</h4>
-            <p>30%</p> 
-          </div>
-        </div>
-      </div>
-      <div class="row" id="graphs">
-        
-        <div class="col-sm-5">
-          <div class="well">
-            <p>Student performance graph</p> 
-            <p>Text</p> 
-            <p>Text</p> 
-          </div>
-        </div>
-        <div class="col-sm-5">
-          <div class="well">
-            <p>Change in registration</p> 
-            <p>Text</p> 
-            <p>Text</p> 
-          </div>
-        </div>
-        
-      </div>
-      <div class="row">
-        <div class="col-sm-8">
-          <div class="well">
-            <p>Text</p> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
+<?php 
+mysqli_close($conn);?>
+
 </body>
 </html>
