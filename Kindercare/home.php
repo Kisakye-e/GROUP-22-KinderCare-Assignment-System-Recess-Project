@@ -1,4 +1,6 @@
-<?php include_once 'layout.php';?>
+<?php include_once 'layout.php';
+include_once 'database.php';
+?>
 <html>
 <head>
 <style>
@@ -53,14 +55,14 @@
   </div>
 
 
-  @if(Session::get('status'))
+  <!-- @if(Session::get('status'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   {{Session::get('status')}}
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-  @endif
+  @endif -->
   <br/>
   <h4>Registered Pupils</h4>
   <br/>
@@ -75,7 +77,7 @@
     </tr>
   </thead>
   <tbody>
-  @foreach($data as $item)
+    @foreach($data as $item)
     <tr>
       <th scope="row"> {{$item -> userCode }}</th>
       <td>{{$item -> firstName }}</td>
