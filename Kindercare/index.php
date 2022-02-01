@@ -77,18 +77,18 @@ body {
 
   <body class="text-center">
     <form class="form-signin" method="POST" action="">
-      @csrf
+    
       <img class="mb-3" src="logo.png" alt="Logo" width="150" height="200">
-      (Session::get('regstatus'))
+
      <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{Session::get('regstatus')}}
+      
      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
       </button>
       </div>
-     (Session::get('fail'))
+    
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      {{Session::get('fail')}}
+      
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
