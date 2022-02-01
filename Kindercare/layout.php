@@ -35,7 +35,7 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-    <a href="/" class="btn btn-outline-light my-2 my-sm-0" type="submit">Log out</a>
+    <a href="logout.php" class="btn btn-outline-light my-2 my-sm-0" type="submit">Log out</a>
       <!-- <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Log out</button> -->
     </form>
   </div>

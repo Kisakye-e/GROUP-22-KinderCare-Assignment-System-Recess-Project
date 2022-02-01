@@ -1,4 +1,11 @@
 <!doctype html>
+
+<?php
+
+session_start();
+
+?>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -79,18 +86,7 @@ body {
     <form class="form-signin" method="POST" action="">
     
       <img class="mb-3" src="img/logo.png" alt="Logo" width="150" height="200">
-     <div class="alert alert-success alert-dismissible fade show" role="alert">
-     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-      </button>
-      </div>
-    
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+     
   
  
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -101,7 +97,7 @@ body {
       <div class="checkbox mb-3">
         <label>
         <p >Don't have an account?
-        <a href="registertr"><span style ="color:#151f28">Register Here</span></a></p>
+        <a href="registerTeacher.php"><span style ="color:#151f28">Register Here</span></a></p>
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
@@ -109,3 +105,33 @@ body {
     </form>
   </body>
 </html>
+
+
+
+<?php
+include "database.php";
+
+if(isset($_POST['submit'])){
+
+    $teacherNumber = mysqli_real_escape_string($conn,$_POST['teacherNumber']);
+    $password = mysqli_real_escape_string($conn,$_POST['password']);
+
+    if ($teacherNumber != "" && $password != ""){
+
+        $sql_query = "select count(*) as cntUser from teachers where teacherNumber='".$teacherNumber."' and password='".$password."'";
+        $result = mysqli_query($conn,$sql_query);
+        $row = mysqli_fetch_array($result);
+
+        $count = $row['cntUser'];
+
+        if($count > 0){
+            $_SESSION['teacherNumber'] = $teacherNumber;
+            header('Location: home.php');
+        }else{
+            echo "Invalid username and password";
+        }
+
+    }
+
+}
+?>
