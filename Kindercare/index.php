@@ -78,7 +78,7 @@ body {
   <body class="text-center">
     <form class="form-signin" method="POST" action="">
     
-      <img class="mb-3" src="logo.png" alt="Logo" width="150" height="200">
+      <img class="mb-3" src="img/logo.png" alt="Logo" width="150" height="200">
 
      <div class="alert alert-success alert-dismissible fade show" role="alert">
       
