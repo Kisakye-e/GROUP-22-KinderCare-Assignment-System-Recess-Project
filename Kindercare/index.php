@@ -1,4 +1,11 @@
 <!doctype html>
+
+<?php
+
+session_start();
+
+?>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -101,7 +108,7 @@ body {
       <div class="checkbox mb-3">
         <label>
         <p >Don't have an account?
-        <a href="registertr"><span style ="color:#151f28">Register Here</span></a></p>
+        <a href="registerTeacher.php"><span style ="color:#151f28">Register Here</span></a></p>
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
@@ -109,3 +116,27 @@ body {
     </form>
   </body>
 </html>
+
+<?php
+//session_start();
+if(isset($_POST['submit']))
+{
+    extract($_POST);
+    include 'database.php';
+    $sql=mysqli_query($conn,"SELECT * FROM teachers where teacherNumber='$teacherNumber' and password='$password'");//validating the details entered
+    $row  = mysqli_fetch_array($sql);
+    if(is_array($row))
+    {
+        
+        $_SESSION["emailAddress"]=$row['emailAddress'];
+        $_SESSION["teacherName"]=$row['teacherNumber'];
+        $_SESSION["firstName"]=$row['firstName'];
+        $_SESSION["lastName"]=$row['lastName'];
+        header("Location: studentview.php"); // taking an authorized user to their student view
+    }
+    else
+    {
+        echo "Invalid Email ID/Password";
+    }
+}
+?>
