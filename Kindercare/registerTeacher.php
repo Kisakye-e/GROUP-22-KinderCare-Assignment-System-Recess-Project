@@ -76,7 +76,7 @@ body {
   <body class="text-center">
     <form class="form-signin" method="post" action="">
     
-      <img class="mb-4" src="logo.png" alt="Logo" width="150" height="150">
+      <img class="mb-4" src="img/logo.png" alt="Logo" width="150" height="150">
       <h1 class="h5 mb-3 font-weight-normal">Please Enter the following details.</h1>
       <label for="inputEmail"  class="sr-only">Email</label>
       <input type="text" name="emailAddress"  class="form-control" placeholder="Enter Email Address" required autofocus>
