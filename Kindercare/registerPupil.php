@@ -6,7 +6,7 @@
   }
   </style>
 <div class="card col-sm-8">
-<form action="" method="post" id="reg">
+<form action="processRegisterPupil.php" method="post" id="reg">
   
   <h3>Fill in this form to register a new pupil</h3>
   <div class="form-group">
