@@ -17,7 +17,9 @@ session_start();
     @media screen and (max-width: 767px) {
       .row.content {height: auto;} 
     }
-    
+    .no-outline:focus {
+        outline: none;
+      }
     
 </style>
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
@@ -48,17 +50,12 @@ session_start();
             <p>3</p> 
           </div>
         </div>
-  </div>
+   </div>
 
 
-  <!-- @if(Session::get('status'))
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-  {{Session::get('status')}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-  @endif -->
+
+
+  
   <br/>
   <h4>Registered Pupils</h4>
   <br/>
@@ -70,6 +67,7 @@ session_start();
       <th scope="col">Last Name</th>
       <th scope="col">Phone Number</th>
       <th scope="col">Activation Status</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -77,26 +75,39 @@ session_start();
     $pupils = mysqli_query($conn,"select * from pupils"); 
     while($data = mysqli_fetch_array($pupils))
 {
-?>
-
-   
+?>  
     <tr>
-      <td scope="row"><?php echo $data['userCode']; ?></td>
+      <form action="changeStatus.php" method="post">
+      <td scope="row"><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
       <td><?php echo $data['firstName'];?></td>
       <td><?php echo $data['lastName']; ?></td>
       <td><?php echo $data['phoneNumber']; ?></td>
-      <td>
+      <?php
+          if($data['activationStatus']== false){ ?>
+          <td><input type="text" name="activationStatusD" value="Deactivated" readonly="readonly"></td>
+          <?php } ?>
+          <?php
+          if($data['activationStatus']== true){ ?>
+          <td><input type="text" name="activationStatusA" value="Activated" readonly="readonly"></td>
+          <?php } ?>
 
-        <input data-id="{{$item->userCode}}" class="toggle-class" type="checkbox"  
-        data-onstyle="success" 
-        data-offstyle="danger" data-toggle="toggle" data-on="Actived" data-off="Deactivated">   
-  </td>
+     
+ 
+<?php if($data['activationStatus']== false){ ?>
+  <td><input type="submit" name="changeD" value="Activate" style="margin-left:11px;"></td>
+ <?php } ?>
+ <?php if($data['activationStatus']== true){ ?>
+  <td><input type="submit" name="changeA" value="Deactivate" style="margin-left:11px;"></td>
+ <?php } ?>
+
+ 
+</form>
   </tr>
 <?php
 }
 ?>
 
-  </tbody>
+</tbody>
 </table>
 <?php 
 mysqli_close($conn);?>

@@ -13,7 +13,11 @@ session_start();
   </style>
 </head>
 <body>
-<div class="col-md-5">
+
+<div class="card col-sm-8">
+<form action="processRegisterPupil.php" method="post" id="reg">
+  <h3>Fill in this form to register a new pupil</h3>
+  <div class="col-md-5">
                 <?php 
                     if(isset($_SESSION['regstatus']))
                     {
@@ -27,10 +31,6 @@ session_start();
                     }
                 ?>
 </div>
-<div class="card col-sm-8">
-<form action="processRegisterPupil.php" method="post" id="reg">
-  
-  <h3>Fill in this form to register a new pupil</h3>
   <div class="form-group">
     <label for="User Code">User Code</label>
     <input type="text" name="userCode" class="form-control"  placeholder="Enter User code">
