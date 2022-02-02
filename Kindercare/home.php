@@ -55,7 +55,7 @@ session_start();
           <div class="well">
             <h4>Pending Activation Requests</h4>
             <?php
-            $query3 = "SELECT * FROM pupils WHERE requestStatus = 'Yes'";
+            $query3 = "SELECT * FROM pupils WHERE requestStatus = 'Pending'";
             $result3 = mysqli_query($conn , $query3);
             $acReq = mysqli_num_rows($result3);?>
             <p><?php echo $acReq; ?></p> 
@@ -93,6 +93,7 @@ session_start();
       <td><?php echo $data['firstName'];?></td>
       <td><?php echo $data['lastName']; ?></td>
       <td><?php echo $data['phoneNumber']; ?></td>
+      
       <?php
           if($data['activationStatus']== false){ ?>
           <td><input type="text" name="activationStatusD" value="Deactivated" readonly="readonly"></td>
@@ -102,16 +103,10 @@ session_start();
           <td><input type="text" name="activationStatusA" value="Activated" readonly="readonly"></td>
           <?php } ?>
 
-     
- 
-<?php if($data['activationStatus']== false){ ?>
-  <td><input type="submit" name="changeD" value="Activate" style="margin-left:11px;"></td>
- <?php } ?>
- <?php if($data['activationStatus']== true){ ?>
+  <?php if($data['activationStatus']== true){ ?>
   <td><input type="submit" name="changeA" value="Deactivate" style="margin-left:11px;"></td>
- <?php } ?>
+  <?php } ?>
 
- 
 </form>
   </tr>
 <?php
