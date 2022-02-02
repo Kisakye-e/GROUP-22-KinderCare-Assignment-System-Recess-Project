@@ -46,39 +46,9 @@ session_start();
 
 
 <body>
-    <!-- <div class="row" style="margin-top:40px;">
-        
-        <div class="col-sm-4">
-          <div class="well">
-            <h4>Registered pupils</h4>
-            <p>19</p> 
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="well">
-            <h4>Deactivated Pupils</h4>
-            <p>6</p> 
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="well">
-            <h4>Pending Activation Requests</h4>
-            <p>3</p> 
-          </div>
-        </div>
-  </div> -->
-
-
-  <!-- @if(Session::get('status'))
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-  {{Session::get('status')}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-  @endif -->
+    
   <br/>
-  <h4>Registered Pupils</h4>
+  <h4>Activation requests</h4>
   <br/>
   <table class="table" id="pupil_table">
   <thead>
@@ -91,7 +61,7 @@ session_start();
   </thead>
   <tbody>
     <?php 
- $query4 = "SELECT * FROM pupils WHERE requestStatus = 'Yes'";
+ $query4 = "SELECT * FROM pupils WHERE requestStatus = 'Pending'";
  $result4 = mysqli_query($conn , $query4);
     while($data = mysqli_fetch_array($result4))
 {
@@ -100,7 +70,7 @@ session_start();
 <form action="changeStatus1.php" method="post">
     <tr>
     <td scope="row"><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
-      <td><?php echo $data['firstName'];?><?php echo $data['lastName'];?></td>
+      <td><?php echo $data['firstName'];?> <?php echo $data['lastName'];?></td>
       <td><input type="text" name="activationStatus" value="Deactivated" readonly="readonly"></td>
       <td><input type="submit" name="change" value="Activate" style="margin-left:11px;"></td>
 

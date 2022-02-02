@@ -13,7 +13,7 @@ if(isset($_POST['submit']))
      $numberOfCharacters = count($assignment);
      $char = "";
      foreach($assignment as $character){
-         $char .= $character.",";
+         $char .= $character;
      }
 
      $sql = "INSERT INTO submittedassignment(teacherNumber,assignment,startDate,startTime,endTime,numberOfCharacters)
