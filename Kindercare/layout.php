@@ -41,19 +41,6 @@
   </div>
   </div>
 </nav>
-        <div class="container">
-        
-
-
-        
-        </div>
-        <!-- <footer>
-            Copyright 2022 KC Educ.
-        </footer> -->
-      <!-- <footer>
-        All rights reserved KinderCare@2022
-      </footer> -->
-
     </body>
 </html>
 

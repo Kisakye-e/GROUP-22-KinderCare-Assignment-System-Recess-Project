@@ -11,7 +11,6 @@ session_start();
         color:white;
         border-radius:5px;
         padding-left: 5px;
-        /* text-align:centre; */
     }
     
     @media screen and (max-width: 767px) {
@@ -35,19 +34,31 @@ session_start();
         <div class="col-sm-4">
           <div class="well">
             <h4>Registered pupils</h4>
-            <p>19</p> 
+            <?php
+            $query = "SELECT * FROM pupils";
+            $result = mysqli_query($conn , $query);
+            $regPupils = mysqli_num_rows($result);?>
+            <p> <?php echo $regPupils; ?> </p> 
           </div>
         </div>
         <div class="col-sm-4">
           <div class="well">
             <h4>Deactivated Pupils</h4>
-            <p>6</p> 
+            <?php
+            $query2 = "SELECT * FROM pupils WHERE activationStatus = false";
+            $result2 = mysqli_query($conn , $query2);
+            $deacPupils = mysqli_num_rows($result2);?>
+            <p><?php echo $deacPupils; ?></p> 
           </div>
         </div>
         <div class="col-sm-4">
           <div class="well">
             <h4>Pending Activation Requests</h4>
-            <p>3</p> 
+            <?php
+            $query3 = "SELECT * FROM pupils WHERE requestStatus = 'Yes'";
+            $result3 = mysqli_query($conn , $query3);
+            $acReq = mysqli_num_rows($result3);?>
+            <p><?php echo $acReq; ?></p> 
           </div>
         </div>
    </div>
