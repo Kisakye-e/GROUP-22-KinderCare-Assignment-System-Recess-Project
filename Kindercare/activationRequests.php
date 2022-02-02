@@ -18,7 +18,7 @@ session_start();
       .row.content {height: auto;} 
     }
     
-    .btn{
+    /* .btn{
             background-color: red;
             border: none;
             color: white;
@@ -36,7 +36,7 @@ session_start();
         }
         .red{
             background-color: red;
-        }
+        } */
 </style>
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
@@ -86,56 +86,26 @@ session_start();
       <th scope="col">User Code</th>
       <th scope="col">Pupil Name</th>
       <th scope="col">Activation Status</th>
-      <th scope="col">Toggle</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <?php 
-    $pupils = mysqli_query($conn,"select * from pupils"); 
-    while($data = mysqli_fetch_array($pupils))
+ $query4 = "SELECT * FROM pupils WHERE requestStatus = 'Yes'";
+ $result4 = mysqli_query($conn , $query4);
+    while($data = mysqli_fetch_array($result4))
 {
 ?>
 
-   
+<form action="changeStatus1.php" method="post">
     <tr>
-      <td scope="row"><?php echo $data['userCode']; ?></td>
-      <td><?php echo $data['firstName'];?> <?php echo $data['lastName']; ?></td>
-      <td>
-
-      <?php 
-                        // Usage of if-else statement to translate the 
-                        // tinyint status value into some common terms
-                        // 0-Inactive
-                        // 1-Active
-                        if($data['activationStatus']=="Activated") 
-                            echo "Activated";
-                        else 
-                            echo "Deactivated";
-                    ?>              
-  </td>
-
-  <td>
-                    <?php 
-                    if($data['activationStatus']=="Activated") 
-  
-                        // if a course is active i.e. status is 1 
-                        // the toggle button must be able to deactivate 
-                        // we echo the hyperlink to the page "deactivate.php"
-                        // in order to make it look like a button
-                        // we use the appropriate css
-                        // red-deactivate
-                        // green- activate
-                        echo 
-"<a href=deactivate.php?userCode=".$data['userCode']." class='btn red'>Deactivate</a>";
-                    else 
-                        echo 
-"<a href=activate.php?userCode=".$data['userCode']." class='btn green'>Activate</a>";
-                    ?>
-            </td>
-
-
+    <td scope="row"><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
+      <td><?php echo $data['firstName'];?><?php echo $data['lastName'];?></td>
+      <td><input type="text" name="activationStatus" value="Deactivated" readonly="readonly"></td>
+      <td><input type="submit" name="change" value="Activate" style="margin-left:11px;"></td>
 
   </tr>
+</form>
 <?php
 }
 ?>
