@@ -30,6 +30,7 @@ session_start();
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 
@@ -73,6 +74,20 @@ session_start();
   <div class="container">
   <h4>Registered Pupils</h4>
   <br/>
+  <div class="col-md-5">
+                <?php 
+                    if(isset($_SESSION['changeStatus']))
+                    {
+                        ?>
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <?php echo $_SESSION['changeStatus']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['changeStatus']);
+                    }
+                ?>
+</div>
   <table class="table" id="pupil_table">
   <thead>
     <tr>
@@ -109,6 +124,9 @@ session_start();
   <?php if($data['activationStatus']== true){ ?>
   <td><input type="submit" name="changeA" value="Deactivate" style="margin-left:11px;"></td>
   <?php } ?>
+  <?php if($data['activationStatus']== false){ ?>
+  <td></td>
+  <?php } ?>
 
 </form>
   </tr>
@@ -121,5 +139,7 @@ session_start();
 <?php 
 mysqli_close($conn);?>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

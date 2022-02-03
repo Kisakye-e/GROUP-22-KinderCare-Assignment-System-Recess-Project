@@ -8,13 +8,13 @@ if(isset($_POST['change']))
         $sql = "UPDATE pupils set requestStatus = 'NULL', activationStatus = true where userCode ='$userCode'";
 	
             if (mysqli_query($conn, $sql)) {
-                
-                header("Location:home.php"); 
-    
+                $_SESSION['changeStatus1']="Pupil activated successfully";                
+                header("Location:activationRequests.php");     
             }
             else {
-            echo "Error: " . $sql . "
-            " . mysqli_error($conn);
+                $_SESSION['changeStatus1']="Failed to activate pupil,please try again.";                
+                header("Location:activationRequests.php"); 
             }
+            mysqli_close($conn);
 }
 
