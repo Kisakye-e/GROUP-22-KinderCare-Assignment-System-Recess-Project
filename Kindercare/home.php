@@ -29,9 +29,10 @@ session_start();
 
 
 <body>
+  <div class="container">
     <div class="row" style="margin-top:40px;">
         
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <div class="well">
             <h4>Registered pupils</h4>
             <?php
@@ -41,7 +42,7 @@ session_start();
             <p> <?php echo $regPupils; ?> </p> 
           </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <div class="well">
             <h4>Deactivated Pupils</h4>
             <?php
@@ -61,13 +62,10 @@ session_start();
             <p><?php echo $acReq; ?></p> 
           </div>
         </div>
-   </div>
-
-
-
-
-  
+      </div>
+    </div>  
   <br/>
+  <div class="container">
   <h4>Registered Pupils</h4>
   <br/>
   <table class="table" id="pupil_table">
@@ -112,11 +110,10 @@ session_start();
 <?php
 }
 ?>
-
 </tbody>
 </table>
 <?php 
 mysqli_close($conn);?>
-
+</div>
 </body>
 </html>

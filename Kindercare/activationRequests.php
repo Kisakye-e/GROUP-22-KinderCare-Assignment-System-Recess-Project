@@ -17,26 +17,6 @@ session_start();
     @media screen and (max-width: 767px) {
       .row.content {height: auto;} 
     }
-    
-    /* .btn{
-            background-color: red;
-            border: none;
-            color: white;
-            padding: 5px 5px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 20px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 20px;
-        }
-        .green{
-            background-color: #199319;
-        }
-        .red{
-            background-color: red;
-        } */
 </style>
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
@@ -46,7 +26,7 @@ session_start();
 
 
 <body>
-    
+<div class="container">
   <br/>
   <h4>Activation requests</h4>
   <br/>
@@ -82,6 +62,7 @@ session_start();
 
   </tbody>
 </table>
+</div>
 <?php 
 mysqli_close($conn);?>
 
