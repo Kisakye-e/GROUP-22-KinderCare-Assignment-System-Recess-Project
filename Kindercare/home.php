@@ -16,8 +16,13 @@ session_start();
     @media screen and (max-width: 767px) {
       .row.content {height: auto;} 
     }
-    .no-outline:focus {
+    .no-outline{
         outline: none;
+        border: none;
+      }
+      .search-input{
+        outline: none;
+        border: none;
       }
     
 </style>
@@ -71,12 +76,12 @@ session_start();
   <table class="table" id="pupil_table">
   <thead>
     <tr>
-      <th scope="col">User Code</th>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Activation Status</th>
-      <th scope="col">Action</th>
+      <th scope="col"><input type="text" class="search-input" placeholder="User Code"></th>
+      <th scope="col"><input type="text" class="search-input" placeholder="First Name"></th>
+      <th scope="col"><input type="text" class="search-input" placeholder="Last Name"></th>
+      <th scope="col"><input type="text" class="search-input" placeholder="Phone Number"></th>
+      <th scope="col"><input type="text" class="search-input" placeholder="Activation Status"></th>
+      <th scope="col"><input type="text" class="search-input" placeholder="Action"></th>      
     </tr>
   </thead>
   <tbody>
@@ -94,11 +99,11 @@ session_start();
       
       <?php
           if($data['activationStatus']== false){ ?>
-          <td><input type="text" name="activationStatusD" value="Deactivated" readonly="readonly"></td>
+          <td><input type="text" name="activationStatusD" class="no-outline" value="Deactivated" readonly="readonly"></td>
           <?php } ?>
           <?php
           if($data['activationStatus']== true){ ?>
-          <td><input type="text" name="activationStatusA" value="Activated" readonly="readonly"></td>
+          <td><input type="text" name="activationStatusA" class="no-outline" value="Activated" readonly="readonly"></td>
           <?php } ?>
 
   <?php if($data['activationStatus']== true){ ?>
@@ -112,6 +117,7 @@ session_start();
 ?>
 </tbody>
 </table>
+<script src="js/home.js"></script>
 <?php 
 mysqli_close($conn);?>
 </div>

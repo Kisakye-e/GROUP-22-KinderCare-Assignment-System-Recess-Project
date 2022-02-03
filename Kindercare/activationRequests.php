@@ -17,6 +17,14 @@ session_start();
     @media screen and (max-width: 767px) {
       .row.content {height: auto;} 
     }
+    .no-outline{
+        outline: none;
+        border: none;
+      }
+      .search-input{
+        outline: none;
+        border: none;
+      }
 </style>
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
@@ -33,10 +41,12 @@ session_start();
   <table class="table" id="pupil_table">
   <thead>
     <tr>
-      <th scope="col">User Code</th>
-      <th scope="col">Pupil Name</th>
-      <th scope="col">Activation Status</th>
-      <th scope="col">Action</th>
+    <th scope="col"><input type="text" class="search-input" placeholder="User Code"></th>
+      <th scope="col"><input type="text" class="search-input" placeholder="First Name"></th>
+      <th scope="col"><input type="text" class="search-input" placeholder="Last Name"></th>
+      <th scope="col"><input type="text" class="search-input" placeholder="Phone Number"></th>
+      <th scope="col"><input type="text" class="search-input" placeholder="Activation Status"></th>
+      <th scope="col"><input type="text" class="search-input" placeholder="Action"></th>      
     </tr>
   </thead>
   <tbody>
@@ -50,8 +60,10 @@ session_start();
 <form action="changeStatus1.php" method="post">
     <tr>
     <td scope="row"><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
-      <td><?php echo $data['firstName'];?> <?php echo $data['lastName'];?></td>
-      <td><input type="text" name="activationStatus" value="Deactivated" readonly="readonly"></td>
+      <td><?php echo $data['firstName'];?></td>
+      <td><?php echo $data['lastName']; ?></td>
+      <td><?php echo $data['phoneNumber']; ?></td>
+      <td><input type="text" name="activationStatus" value="Deactivated" class="no-outline" readonly="readonly"></td>
       <td><input type="submit" name="change" value="Activate" style="margin-left:11px;"></td>
 
   </tr>
@@ -62,6 +74,7 @@ session_start();
 
   </tbody>
 </table>
+<script src="js/home.js"></script>
 </div>
 <?php 
 mysqli_close($conn);?>
