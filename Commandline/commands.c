@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <winsock.h>
-#include <mysql.h>
-#include <string.h>
-
+#include<winsock.h>
+#include<mysql.h>
+#include<string.h>
+#include<time.h>
+#include<stdbool.h>
  MYSQL *conn;
  MYSQL_RES *res;
  MYSQL_ROW row;
+ time_t difference;
+ time_t total_time;
 
  char matrix[28]={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2'};
 char matrix_a[29]={' ','*',' ',' ','*','*','*',' ','*',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
@@ -30,7 +33,7 @@ char matrix_r[28]={'*','*','*',' ','*',' ',' ','*','*',' ',' ','*','*','*','*','
 char matrix_s[28]={' ','*','*',' ','*',' ',' ','*','*',' ',' ',' ',' ','*','*',' ',' ',' ',' ','*','*',' ',' ','*',' ','*','*',' '};
 char matrix_t[28]={'*','*','*',' ',' ','*',' ',' ',' ','*',' ',' ',' ','*',' ',' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
 char matrix_u[28]={'*',' ',' ','*','*',' ',' ','*','*',' ',' ','*','*',' ',' ','*','*',' ',' ','*','*',' ',' ','*',' ','*','*',' '};
-char matrix_v[28]={'*',' ',' ','*',' ','*',' ','*',' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
+//char matrix_v[28]={'','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''};
 char matrix_w[28]={'*',' ',' ','*','*',' ',' ','*','*','*','*','*','*',' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
 char matrix_x[28]={'*',' ',' ','*',' ','*','*',' ',' ','*','*',' ','*',' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
 char matrix_y[28]={'*',' ',' ','*',' ','*',' ','*',' ',' ','*',' ',' ',' ','*',' ',' ',' ','*',' ',' ',' ','*',' ',' ',' ',' ',' '};
@@ -48,13 +51,17 @@ char passwordEntered[10];
 
 void enter();
 void answer();
-int attempt(ch);
-int k=0;
+float attempt(ch);
+float k;
 
 //void finish_with_error();
 void check_activation()
 {
-     char query_string[] = {"SELECT activationstatus FROM pupil where  userCode = '%s' and password = '%s'"};
+
+    char activated[10];
+    char activate[20]= "1";
+
+     char query_string[] = {"SELECT activationStatus FROM pupils where  userCode = '%s' and password = '%s'"};
 		sprintf(r, query_string,usercodeEntered,passwordEntered);
 		if (mysql_query(conn, r)) {
 			//fprintf(stderr, "%s\n", mysql_error(conn));
@@ -72,10 +79,18 @@ res=mysql_store_result(conn);
 
        int num_fields=mysql_num_fields(res);
            while((row=mysql_fetch_row(res))){
-            for(int i=0; i<num_fields; i++){
-                printf("%s\t", row[i]?row[i]: "NULL");
-            }
-            printf("\n");
+               strcpy(activated,row[0]);
+
+               if(strcmp(activated,activate)==0)
+               {
+                   printf("You are activated");
+               }
+
+               else
+               {
+                   printf("You have been deactivated");
+               }
+
         }
 }
 
@@ -127,7 +142,7 @@ int main()
 
 
 
-    char query_string[] = {"SELECT * FROM pupil where  userCode = '%s' and password = '%s' "};
+    char query_string[] = {"SELECT * FROM pupils where  userCode = '%s' and password = '%s' "};
 		sprintf(q, query_string,usercodeEntered,passwordEntered);
 		if (mysql_query(conn, q)) {
 			//fprintf(stderr, "%s\n", mysql_error(conn));
@@ -138,7 +153,10 @@ int main()
 		res = mysql_store_result(conn);
 
 		if((row= mysql_fetch_row(res)) > 0) {
+for(;;)
+{
 
+printf("\n\n\n");
      printf("Below are the commands that you can use:\n");
      printf("     1.Viewall\n");
      printf("     2.Checkstatus\n");
@@ -147,9 +165,12 @@ int main()
      printf("     5.Check ActivationStatus\n");
      printf("     6.Attemptassignment\n");
      printf("     7.RequestActivation\n\n");
+     printf("     8.Exit_program \n\n");
 
-     printf("Enter a command\n");
+     printf("Enter a command\n\n");
      scanf("%s", command);
+
+     printf("\n\n\n");
     fflush(stdin);
 
 
@@ -158,6 +179,7 @@ int main()
       char c[]="Viewall";
       char d[]="Checkdates";
       char e[]="Attemptassignment";
+      char f[]="Exit_program";
 
      if(strcmp(command,a)==0){
     // check_activation(usercodeEntered,passwordEntered);
@@ -169,7 +191,7 @@ int main()
 
  else if(strcmp(command,b)==0)
   {
-      char query_string[] = {"UPDATE pupil SET requeststatus= 'Pending' where  userCode = '%s' AND password = '%s' AND activationstatus = 'deactivated' "};
+      char query_string[] = {"UPDATE pupils SET requestStatus= 'Pending' where  userCode = '%s' AND password = '%s' AND activationStatus = '0' "};
 		sprintf(r, query_string,usercodeEntered,passwordEntered);
 		if (mysql_query(conn, r)) {
 			//fprintf(stderr, "%s\n", mysql_error(conn));
@@ -187,7 +209,7 @@ printf("Activation Request has been successfully sent");
 
  else if(strcmp(command,c)==0)
  {
-     char query_string[] = {"SELECT AssignmentNo,startDate,endDate FROM submiitedassignment WHERE teacherNo=(SELECT teacherNo FROM pupil where userCode = '%s' and password= '%s')"};
+     char query_string[] = {"SELECT assignmentnumber,startDate FROM submittedassignment WHERE teacherNumber=(SELECT teacherNumber FROM pupils where userCode = '%s' and password= '%s')"};
      sprintf(r, query_string,usercodeEntered,passwordEntered);
 		if (mysql_query(conn, r))
         {
@@ -202,6 +224,7 @@ printf("Activation Request has been successfully sent");
        int num_fields=mysql_num_fields(res);
            while((row=mysql_fetch_row(res))){
             for(int i=0; i<num_fields; i++){
+
                 printf("%s\t", row[i]?row[i]: "NULL");
             }
             printf("\n");
@@ -220,7 +243,7 @@ printf("Activation Request has been successfully sent");
 
 
     //checking for pupil's user code and password in the database
-    char query_string[]="SELECT * FROM submiitedassignment where startDate >= '%s' AND endDate <= '%s' AND teacherNo=(SELECT teacherNo FROM pupil where userCode ='%s')";
+    char query_string[]="SELECT assignmentnumber,startDate,startTime,endTime FROM submittedassignment where startDate BETWEEN  '%s' AND  '%s' AND teacherNumber=(SELECT teacherNumber FROM pupils where userCode ='%s')";
     sprintf(q,query_string,start,end,usercodeEntered);
     if(mysql_query(conn,q))
     {
@@ -248,7 +271,7 @@ printf("Activation Request has been successfully sent");
                 char assignmentid[20];
                 printf("\nEnter assignmentid: ");
                 scanf("%s", assignmentid);
-             char query_string[]="SELECT Assignment FROM submiitedassignment where AssignmentNo = '%s' AND teacherNo=(SELECT teacherNo FROM pupil where userCode ='%s')";
+             char query_string[]="SELECT assignment FROM submittedassignment where assignmentnumber = '%s' AND teacherNumber=(SELECT teacherNumber FROM pupils where userCode ='%s')";
     sprintf(q,query_string,assignmentid, usercodeEntered);
     if(mysql_query(conn,q))
     {
@@ -265,23 +288,47 @@ char assignment[30];
        int num_fields=mysql_num_fields(res);
            while((row=mysql_fetch_row(res))){
                 strcpy(assignment, row[0]);
-                int score=0;
+                float score;
+                float total_score = 0;
+                int length;
                 for(int i=0;i<strlen(assignment);++i)
                 {
+                   score = 0;
 
-                   // int ;
-                   score= attempt(assignment[i]);
-                    //total+=k;
+                   score= (attempt(assignment[i])/28) * 100;
+                   total_score += score;
+                   printf("\n\nCHARACTER SCORE : %.0f%%.\n\n",score);
+
+
+                                   //total+=k;
 
                     //printf("%d",k);
                 }
-                printf("%d",score);
 
 
 
+                printf("\n\ntotal score = %.0f%%.\n\n", total_score/strlen(assignment));
+                printf("%d",total_time);
+
+
+           // char query[]="INSERT INTO`attemptedassignment`(`assignmentnumber`,`userCode`,`duration`,`score`)VALUES('1','kp005','28','79%')";
+            char query[]="INSERT INTO attemptedassignment(assignmentnumber, userCode, duration, score) VALUES('%s', '%s', '%d', '%.0f')";
+            sprintf(q,query, assignmentid, usercodeEntered, total_time, total_score/strlen(assignment));
+            if(mysql_query(conn,q))
+            {
+                finish_with_error(conn);
+            }
+              printf("Successfully added");
         }
 
 		}
+
+		else if(strcmp(command,f)==0)
+        {
+            exit(0);
+        }
+
+}
 
 		}
 
@@ -322,7 +369,7 @@ void enter(ch)
 }
 
 
-int attempt(ch)
+float attempt(ch)
 {
     printf("Letter %c",ch);
     printf("\n");
@@ -342,8 +389,12 @@ int attempt(ch)
    printf("|  %c  |   %c |   %c |  %c  |\n",matrix[24],matrix[25],matrix[26],matrix[27]);
    printf("|_____|_____|_____|_____|\n");
 
+time_t start_time,end_time;
+
+     start_time=time(NULL);
    for(int i=0;i<29;i++)
    {
+
 
    printf("Enter 0 or 1 at position %c:",matrix[i]);
    scanf("%d",&position);
@@ -366,9 +417,19 @@ int attempt(ch)
    }
 
    }
+
+   end_time=time(NULL);
+
+
+
+
+   difference=end_time-start_time;
+
+
+   printf("\n\nTime taken = %ld\n\n",difference);
     if(ch=='A')
  {
-     int k=0;
+      k=0;
     for(int i=0;i<29;++i)
   {
 if(matrix_a[i]==matrix_entered[i])
@@ -385,6 +446,7 @@ else
 
  else if(ch=='B')
 {
+     k=0;
 for(int i=0;i<29;++i)
 {
 if(matrix_b[i]==matrix_entered[i])
@@ -411,6 +473,7 @@ else
 
 else if(ch=='C')
 {
+    k=0;
 
 
 for(int i=0;i<29;++i)
@@ -559,6 +622,7 @@ if(matrix_h[i]==matrix_entered[i])
 {
 
     k++;
+
 
 }
 
@@ -934,7 +998,7 @@ else
 
 }
 
-else if(ch=='V')
+/*else if(ch=='V')
 {
 int k=0;
 for(int i=0;i<29;++i)
@@ -961,7 +1025,7 @@ else
 
 printf("%d",k);
 }
-
+*/
 else if(ch=='X')
 {
 
@@ -1048,6 +1112,7 @@ else
 
 
     answer();
+    total_time+=difference;
     return k;
 }
 
