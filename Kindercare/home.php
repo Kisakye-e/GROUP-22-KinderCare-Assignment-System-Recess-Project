@@ -1,80 +1,171 @@
-<?php include_once 'layout.php';
-include_once 'database.php';
-session_start(); 
+<?php
+session_start();
+include_once 'layout.php';
+include_once 'database.php'; 
 ?>
-<html>
-<head>
-<style>
-    
-    .well{
-        background-color:#0275d8;
-        color:white;
-        border-radius:5px;
-        padding-left: 5px;
-    }
-    
-    @media screen and (max-width: 767px) {
-      .row.content {height: auto;} 
-    }
-    .no-outline{
-        outline: none;
-        border: none;
-      }
-      .search-input{
-        outline: none;
-        border: none;
-      }
-    
-</style>
-<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<head>  
 
-
-<body>
-  <div class="container">
-    <div class="row" style="margin-top:40px;">
+<!-- Data tables css -->
+    <link href="css/bootstrap.min.css"rel="stylesheet">
+    <link href="css/datatables.min.css" rel="stylesheet">
+    <style>
+        #sparklinedash{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #sparklinedash2{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #sparklinedash3{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Registered pupils</h4>
-            <?php
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Dashboard</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <div class="d-md-flex">
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Three charts -->
+                <!-- ============================================================== -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Registered Pupils</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash"><canvas width="67" height="30"
+                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                    </div>
+                                    <script>
+                                        const data1 = [0, 5, 6, 10, 9, 12, 4, 9]
+                                        const config1 = {
+                                        type: 'bar',
+                                        height: '50',
+                                        barWidth: '10',
+                                        resize: true,
+                                        barSpacing: '5',
+                                        barColor: '#7ace4c'
+                                        }
+                                        $('#sparklinedash').sparkline(data1, config1)
+
+                                    </script>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-success">
+                                <?php
             $query = "SELECT * FROM pupils";
             $result = mysqli_query($conn , $query);
-            $regPupils = mysqli_num_rows($result);?>
-            <p> <?php echo $regPupils; ?> </p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Deactivated Pupils</h4>
-            <?php
+            $regPupils = mysqli_num_rows($result);
+            echo $regPupils;?>
+
+                                </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Deactivated Pupils</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash3"><canvas width="67" height="30"
+                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                    </div>
+                                    <script>
+                                        const data2 = [0, 5, 6, 10, 9, 12, 4, 9]
+                                        const config2 = {
+                                        type: 'bar',
+                                        height: '50',
+                                        barWidth: '10',
+                                        resize: true,
+                                        barSpacing: '5',
+                                        barColor: '#CBC3E3'
+                                        }
+                                        $('#sparklinedash3').sparkline(data2, config2)
+
+                                    </script>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-purple" ><?php
             $query2 = "SELECT * FROM pupils WHERE activationStatus = false";
             $result2 = mysqli_query($conn , $query2);
-            $deacPupils = mysqli_num_rows($result2);?>
-            <p><?php echo $deacPupils; ?></p> 
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="well">
-            <h4>Pending Activation Requests</h4>
-            <?php
+            $deacPupils = mysqli_num_rows($result2);
+            echo $deacPupils; 
+            ?></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Pending Activation Requests</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash2"><canvas width="67" height="30"
+                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                    </div>
+                                    <script>
+                                        const data = [0, 5, 6, 10, 9, 12, 4, 9]
+                                        const config = {
+                                        type: 'bar',
+                                        height: '50',
+                                        barWidth: '10',
+                                        resize: true,
+                                        barSpacing: '5',
+                                        barColor: '#ADD8E6'
+                                        }
+                                        $('#sparklinedash2').sparkline(data, config)
+
+                                    </script>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-info"> <?php
             $query3 = "SELECT * FROM pupils WHERE requestStatus = 'Pending'";
             $result3 = mysqli_query($conn , $query3);
-            $acReq = mysqli_num_rows($result3);?>
-            <p><?php echo $acReq; ?></p> 
-          </div>
-        </div>
-      </div>
-    </div>  
-  <br/>
-  <div class="container">
-  <h4>Registered Pupils</h4>
-  <br/>
-  <div class="col-md-5">
+            $acReq = mysqli_num_rows($result3);
+            echo $acReq;
+            ?></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+              <!-- ============================================================== -->
+                <!-- REGISTERED PUPILS -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box">
+                            <div class="d-md-flex mb-3">
+                                <h3 class="box-title mb-0">Registered Pupils</h3>
+                                <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
+                                    
+                                </div>
+                            </div>
+            <div class="col-md-12">
                 <?php 
                     if(isset($_SESSION['changeStatus']))
                     {
@@ -87,59 +178,99 @@ session_start();
                          unset($_SESSION['changeStatus']);
                     }
                 ?>
-</div>
-  <table class="table" id="pupil_table">
-  <thead>
-    <tr>
-      <th scope="col"><input type="text" class="search-input" placeholder="User Code"></th>
-      <th scope="col"><input type="text" class="search-input" placeholder="First Name"></th>
-      <th scope="col"><input type="text" class="search-input" placeholder="Last Name"></th>
-      <th scope="col"><input type="text" class="search-input" placeholder="Phone Number"></th>
-      <th scope="col"><input type="text" class="search-input" placeholder="Activation Status"></th>
-      <th scope="col"><input type="text" class="search-input" placeholder="Action"></th>      
-    </tr>
-  </thead>
-  <tbody>
-    <?php 
+                </div>
+                            <div class="table-responsive" >
+                                <table class="display cell-border" id="table_id">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="User Code" readonly="readonly"></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Pupil Number" readonly="readonly"></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="First Name" readonly="readonly"></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Last Name" readonly="readonly"></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Phone Number" readonly="readonly"></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Activation Status" readonly="readonly"></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Action" readonly="readonly"></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Edit details" readonly="readonly"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php 
     $pupils = mysqli_query($conn,"select * from pupils"); 
     while($data = mysqli_fetch_array($pupils))
 {
 ?>  
-    <tr>
-      <form action="changeStatus.php" method="post">
-      <td scope="row"><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
-      <td><?php echo $data['firstName'];?></td>
-      <td><?php echo $data['lastName']; ?></td>
-      <td><?php echo $data['phoneNumber']; ?></td>
-      
-      <?php
-          if($data['activationStatus']== false){ ?>
-          <td><input type="text" name="activationStatusD" class="no-outline" value="Deactivated" readonly="readonly"></td>
-          <?php } ?>
-          <?php
-          if($data['activationStatus']== true){ ?>
-          <td><input type="text" name="activationStatusA" class="no-outline" value="Activated" readonly="readonly"></td>
-          <?php } ?>
-
-  <?php if($data['activationStatus']== true){ ?>
-  <td><input type="submit" name="changeA" value="Deactivate" style="margin-left:11px;"></td>
+                                        <tr>
+                                        <form action="changeStatus.php" method="post">
+                                            <td style="text-align:center;"><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
+                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['pupilNumber'];?></td>
+                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['firstName'];?></td>
+                                            
+                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['lastName'];?></td>
+                                            <td style="text-align:center;"><?php echo $data['phoneNumber']; ?></td>
+                                            <?php
+                                                if($data['activationStatus']== false){ ?>
+                                                    <td style="text-align:center;"><input type="text" style="color:red;" name="activationStatusD" class="no-outline" value="Deactivated" readonly="readonly"></td>
+                                            <?php } ?>
+                                            <?php
+                                                if($data['activationStatus']== true){ ?>
+                                                    <td style="text-align:center;"><input type="text" name="activationStatusA" style="color:green;" class="no-outline" value="Activated" readonly="readonly"></td>
+                                            <?php } ?>
+          <?php if($data['activationStatus']== true){ ?>
+  <td style="text-align:center;"><input type="submit" name="changeA" class="btn btn-danger" value="Deactivate" style="margin-left:11px; color:white;"></td>
   <?php } ?>
   <?php if($data['activationStatus']== false){ ?>
   <td></td>
   <?php } ?>
+  <td style="text-align:center;"><a href="#"><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a></td>
 
 </form>
-  </tr>
-<?php
+                                        </tr>
+                                        <?php
 }
 ?>
-</tbody>
-</table>
-<script src="js/home.js"></script>
+                                        
+                                    </tbody>
+                                </table>
+    <script>
+        $(document).ready(function(){
+            $('.display').DataTable();           
+
+        })
+        </script>
+                              
 <?php 
 mysqli_close($conn);?>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Recent Comments -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center"> 2022 © KINDERCARE EDUCATION SERVICES                     
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== --> 
+   
+    <script src= "js/jquery-3.6.0.min.js"></script>
+    <script src= "js/bootstrap.min.js"></script>
+    <script src= "js/datatables.min.js"></script> 
+    </body>
+    

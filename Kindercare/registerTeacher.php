@@ -1,7 +1,8 @@
 <!doctype html>
 
 <?php
-
+ob_start();
+session_start();
 include_once 'database.php';
 
 ?>
@@ -9,6 +10,13 @@ include_once 'database.php';
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>KinderCare Education Centre|Assignment Management System</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
@@ -16,6 +24,7 @@ include_once 'database.php';
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <title>Register here</title>
 
@@ -82,7 +91,10 @@ body {
   <body class="text-center">
     <form class="form-signin" method="post" action="">
     
-      <img class="mb-4" src="img/logo.png" alt="Logo" width="150" height="150">
+    
+    <img class="mb-3" src="img/logo-text (2).png" alt="Logo" width="110px" height="70px">
+   
+
       <h1 class="h5 mb-3 font-weight-normal">Please Enter the following details.</h1>
       <label for="inputEmail"  class="sr-only">Email</label>
       <input type="text" name="emailAddress"  class="form-control" placeholder="Enter Email Address" required autofocus>
@@ -94,15 +106,39 @@ body {
       <input type="text" name="lastName" class="form-control" placeholder="Enter Last Name" required>
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="password" class="form-control" placeholder="Password" required>
+      <?php 
+                    if(isset($_SESSION['regTr']))
+                    {
+                        ?>
+                            <div class="alert alert-primary alert-dismissible fade show" style="text-align:left;"role="alert">
+                            <?php echo $_SESSION['regTr']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['regTr']);
+                    }
+                    if(isset($_SESSION['regTr2']))
+                    {
+                        ?>
+                            <div class="alert alert-danger alert-dismissible fade show" style="text-align:left;"role="alert">
+                            <?php echo $_SESSION['regTr2']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['regTr2']);
+                    }
+                ?>  
       <div class="checkbox mb-3">
         <label>
         <p >Already have an account?
         <a href="index.php"><span style ="color:#151f28">Sign In here</span></a></p>
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" name="save" type="submit">Register Here</button>
+      <button class="btn btn-lg btn-success btn-block" name="save" type="submit">Register Here</button>
       <p class="mt-4 mb-3 text-muted">&copy; 2022</p>
     </form>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
 
@@ -112,6 +148,7 @@ body {
 
 if(isset($_POST['save']))
 {	 
+  
 	//extracting the values entered into the form 
 	 $emailAddress = $_POST['emailAddress'];
 	 $teacherNumber = $_POST['teacherNumber'];
@@ -123,13 +160,16 @@ if(isset($_POST['save']))
 	$sql = "INSERT INTO teachers (emailAddress,teacherNumber,firstName,lastName,password)
 	 VALUES ('$emailAddress','$teacherNumber','$firstName','$lastName','$password')";
 	 if (mysqli_query($conn, $sql)) {
-		echo "New record created successfully !";
-		header("Location: index.php"); 
+    $_SESSION['regTr']="Registration successful";
+    header("Location:registerTeacher.php"); 
+		// echo "New record created successfully !";
+		// header("Location: index.php"); 
 
 	 } else {
-		echo "Error: " . $sql . "
-" . mysqli_error($conn);
-	 }
+		$_SESSION['regTr2']="Failed to register, please try again.";
+    header("Location:registerTeacher.php"); }
+
 	 mysqli_close($conn);
+   ob_end_flush();
 }
 ?>

@@ -8,6 +8,13 @@ session_start();
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>KinderCare Education Centre|Assignment Management System</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
@@ -83,12 +90,13 @@ body {
   <body class="text-center">
     <form class="form-signin" method="POST" action="">
     
-      <img class="mb-3" src="img/logo.png" alt="Logo" width="150" height="200">
+      <!-- <img class="mb-3" src="img/logo Icon.png" alt="Logo" > -->
+      <img class="mb-3" src="img/logo-text (2).png" alt="Logo" width="110px" height="70px">
                 <?php 
                     if(isset($_SESSION['signin']))
                     {
                         ?>
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <div class="alert alert-primary alert-dismissible fade show" style="text-align:left;"role="alert">
                             <?php echo $_SESSION['signin']; ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
@@ -108,7 +116,7 @@ body {
         <a href="registerTeacher.php"><span style ="color:#151f28">Register Here</span></a></p>
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
+      <button class="btn btn-lg btn-success btn-block" name="submit" type="submit">Sign in</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
     </form>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -133,9 +141,10 @@ if(isset($_POST['submit'])){
         $row = mysqli_fetch_array($result);
 
         $count = $row['cntUser'];
-
+        
         if($count > 0){
             $_SESSION['teacherNumber'] = $teacherNumber;
+            
             header('Location: home.php');
         }else{
           $_SESSION['signin']="Invalid teacher number or password";
