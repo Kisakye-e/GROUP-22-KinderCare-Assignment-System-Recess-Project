@@ -1,8 +1,6 @@
 <?php
 session_start();
 include_once 'layout.php'; 
-
-    // SOME ERRORS STEMING HERE
     $id =$_GET['id'];  
     $queryE = "SELECT * FROM pupils where pupilNumber = '$id'";
     $resultE = mysqli_query($conn , $queryE);
