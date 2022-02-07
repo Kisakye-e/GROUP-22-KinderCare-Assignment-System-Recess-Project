@@ -1,5 +1,4 @@
 <?php
-
 include_once 'database.php';
 
 ?>
@@ -233,7 +232,7 @@ include_once 'database.php';
     <script src="plugins/bower_components/chartist/dist/chartist.min.js"></script>
     <script src="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
     <script src="js/pages/dashboards/dashboard1.js"></script>
-    
+   
    
     
 

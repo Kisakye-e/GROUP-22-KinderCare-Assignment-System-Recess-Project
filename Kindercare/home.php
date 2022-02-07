@@ -177,8 +177,21 @@ include_once 'database.php';
                         <?php
                          unset($_SESSION['changeStatus']);
                     }
+                    
+                    if(isset($_SESSION['updatePupil']))
+                    {
+                        ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?php echo $_SESSION['updatePupil']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['updatePupil']);
+                    }
                 ?>
+                
                 </div>
+
                             <div class="table-responsive" >
                                 <table class="display cell-border" id="table_id">
                                     <thead>
@@ -203,8 +216,7 @@ include_once 'database.php';
                                         <form action="changeStatus.php" method="post">
                                             <td style="text-align:center;"><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
                                             <td style="text-align:center;" class="txt-oflo"><?php echo $data['pupilNumber'];?></td>
-                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['firstName'];?></td>
-                                            
+                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['firstName'];?></td>                                            
                                             <td style="text-align:center;" class="txt-oflo"><?php echo $data['lastName'];?></td>
                                             <td style="text-align:center;"><?php echo $data['phoneNumber']; ?></td>
                                             <?php
@@ -221,7 +233,7 @@ include_once 'database.php';
   <?php if($data['activationStatus']== false){ ?>
   <td></td>
   <?php } ?>
-  <td style="text-align:center;"><a href="#"><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a></td>
+  <td style="text-align:center;"><a href="editPupil.php?id=<?php echo $data['pupilNumber']; ?>" ><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a></td>
 
 </form>
                                         </tr>
