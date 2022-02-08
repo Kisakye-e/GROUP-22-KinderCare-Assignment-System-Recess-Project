@@ -177,15 +177,22 @@ include_once 'database.php';
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="assignments.php"
                                 aria-expanded="false">
-                                <i class="fa fa-file-alt" aria-hidden="true"></i>
+                                <i class="fa fa-folder" aria-hidden="true"></i>
                                 <span class="hide-menu">Assignments</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="addassignment.php"
                                 aria-expanded="false">
-                                <i class="fa fa-book" aria-hidden="true"></i>
+                                <i class="fa fa-file-alt" aria-hidden="true"></i>
                                 <span class="hide-menu">Add Assignment</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grades.php"
+                                aria-expanded="false">
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                                <span class="hide-menu">Pupil Grades</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
