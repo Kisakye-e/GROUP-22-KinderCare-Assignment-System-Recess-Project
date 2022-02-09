@@ -70,7 +70,7 @@ include_once 'database.php';
                                         <th class="border-top-0" hidden scope="col"><input type="text" class="search-input" placeholder="Assignment id"></th>
                                         <th class="border-top-0"  scope="col"><input type="text" class="search-input" placeholder="Assignment id"></th>
                                         <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="User Code"></th>
-                                        <!-- <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Pupil Name"></th> -->
+                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Pupil Name"></th>
                                         <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Duration"></th>
                                         <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Score" ></th>
                                         <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Comment" ></th>
@@ -79,26 +79,31 @@ include_once 'database.php';
                                     </thead>
                                     <tbody>
                                     <?php 
-                                        $grades = mysqli_query($conn,"select * from attemptedassignment"); 
-                                        while($data = mysqli_fetch_array($grades))
-                                        { 
-                                            ?>
-                                        <tr>
-                                        <form action="" method="post">
-                                            <td style="text-align:center;" hidden><input type="text" class="no-outline" name="assignmentnumber" value="<?php echo $data['assignmentnumber'];?>" readonly="readonly"></td>
-                                            <td style="text-align:center;"><?php echo $data['assignmentnumber'];?></td>
-                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['userCode'];?></td>
-                                            <!-- run a query to return names -->
-                                            
-                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['duration'];?></td>
-                                            <td style="text-align:center;"><?php echo $data['score'];?></td>
-                                            <td style="text-align:center;"><?php echo $data['comment'];?></td>
-                                            <td style="text-align:center;"><a href="addComment.php?id=<?php echo $data['id']; ?>" ><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a></td>
-                                        </form>
-                                        </tr>  
-                                        <?php
-                                            }
-                                            ?>  
+                                    // The inner join party.....................
+                                        $sql = "SELECT * FROM attemptedassignment INNER JOIN pupils ON attemptedassignment.userCode = pupils.userCode";
+                                        $result = mysqli_query($conn, $sql);
+                                        if(mysqli_num_rows($result)>0){                                            
+                                            while($data =mysqli_fetch_array($result))
+                                            { 
+                                                ?>
+                                            <tr>
+                                            <form action="" method="post">
+                                                <td style="text-align:center;" hidden><input type="text" class="no-outline" name="assignmentnumber" value="<?php echo $data['assignmentnumber'];?>" readonly="readonly"></td>
+                                                <td style="text-align:center;"><?php echo $data['assignmentnumber'];?></td>
+                                                <td style="text-align:center;" class="txt-oflo"><?php echo $data['userCode'];?></td>
+                                                <td style="text-align:center;" class="txt-oflo"><?php echo $data['firstName']."  ". $data['lastName'];?></td>
+                                                <td style="text-align:center;" class="txt-oflo"><?php echo $data['duration'];?></td>
+                                                <td style="text-align:center;"><?php echo $data['score'];?></td>
+                                                <td style="text-align:center;"><?php echo $data['comment'];?></td>
+                                                <td style="text-align:center;"><a href="addComment.php?id=<?php echo $data['id']; ?>" ><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a></td>
+                                            </form>
+                                            </tr>  
+                                            <?php
+                                                }
+                                                  
+                                        }
+                                        ?>
+                                       
                                              </tbody>
                                                 </table>
                                                    <script>
