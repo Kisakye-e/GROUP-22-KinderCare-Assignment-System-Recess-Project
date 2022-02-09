@@ -1,6 +1,5 @@
 $(function() {
     "use strict";
-
     //****************************
     /* Top navbar Theme Change function Start */
     //****************************
