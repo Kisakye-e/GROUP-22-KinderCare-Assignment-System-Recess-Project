@@ -70,6 +70,7 @@ include_once 'database.php';
                                         <th class="border-top-0" hidden scope="col"><input type="text" class="search-input" placeholder="Assignment id"></th>
                                         <th class="border-top-0"  scope="col"><input type="text" class="search-input" placeholder="Assignment id"></th>
                                         <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="User Code"></th>
+                                        <!-- <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Pupil Name"></th> -->
                                         <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Duration"></th>
                                         <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Score" ></th>
                                         <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Comment" ></th>
@@ -87,6 +88,8 @@ include_once 'database.php';
                                             <td style="text-align:center;" hidden><input type="text" class="no-outline" name="assignmentnumber" value="<?php echo $data['assignmentnumber'];?>" readonly="readonly"></td>
                                             <td style="text-align:center;"><?php echo $data['assignmentnumber'];?></td>
                                             <td style="text-align:center;" class="txt-oflo"><?php echo $data['userCode'];?></td>
+                                            <!-- run a query to return names -->
+                                            
                                             <td style="text-align:center;" class="txt-oflo"><?php echo $data['duration'];?></td>
                                             <td style="text-align:center;"><?php echo $data['score'];?></td>
                                             <td style="text-align:center;"><?php echo $data['comment'];?></td>
@@ -106,10 +109,10 @@ include_once 'database.php';
                                              
                                                         </script>
                                      <?php 
-mysqli_close($conn);?>                   
-<script src="js/home.js">
-    
-    </script>
+                                            mysqli_close($conn);?>                   
+                                            <script src="js/home.js">
+                                                
+                                                </script>
                             </div>
                         </div>
                     </div>

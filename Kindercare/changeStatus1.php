@@ -9,11 +9,11 @@ if(isset($_POST['change']))
 	
             if (mysqli_query($conn, $sql)) {
                 $_SESSION['changeStatus1']="Pupil activated successfully";                
-                header("Location:activationRequests.php");     
+                header("Location:home.php");     
             }
             else {
                 $_SESSION['changeStatus1']="Failed to activate pupil,please try again.";                
-                header("Location:activationRequests.php"); 
+                header("Location:home.php"); 
             }
             mysqli_close($conn);
 }

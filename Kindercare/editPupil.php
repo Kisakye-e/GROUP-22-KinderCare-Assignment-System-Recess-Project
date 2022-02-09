@@ -2,7 +2,7 @@
 session_start();
 include_once 'layout.php'; 
     $id =$_GET['id'];  
-    $queryE = "SELECT * FROM pupils where pupilNumber = '$id'";
+    $queryE = "SELECT * FROM pupils where userCode = '$id'";
     $resultE = mysqli_query($conn , $queryE);
     $data = mysqli_fetch_array($resultE);     
 ?>
@@ -53,12 +53,7 @@ include_once 'layout.php';
                                             <input type="text" name="userCode" placeholder="Enter pupil User Code" value= "<?php echo $data['userCode']; ?>"
                                                 class="form-control p-0 border-0"> </div>
                                     </div>
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Pupil Number</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" name="pupilNumber" placeholder="Enter Pupil Number" value= "<?php echo $data['pupilNumber']; ?>"
-                                                class="form-control p-0 border-0"> </div>
-                                    </div>
+                                    
                                     <div class="form-group mb-4">
                                         <label class="col-md-12 p-0">First Name</label>
                                         <div class="col-md-12 border-bottom p-0">

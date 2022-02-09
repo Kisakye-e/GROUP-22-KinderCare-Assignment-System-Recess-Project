@@ -1,7 +1,11 @@
-<?php 
-session_start(); 
-include_once 'layout.php';
-include_once 'database.php';
+<?php
+session_start();
+include_once 'layout.php'; 
+    $id =$_GET['id'];  
+    $queryZ = "SELECT * FROM submittedassignment where assignmentnumber = '$id'";
+    $resultZ = mysqli_query($conn , $queryZ);
+    $data = mysqli_fetch_assoc($resultZ);  
+    
 ?>
 <!-- Page wrapper  -->
         <!-- ============================================================== -->
@@ -12,17 +16,10 @@ include_once 'database.php';
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">View Reports</h4>
+                        <h4 class="page-title">Edit pupil details</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <!-- <div class="d-md-flex">
-                            <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Dashboard</a></li>
-                            </ol>
-                            <a href="https://www.wrappixel.com/templates/ampleadmin/" target="_blank"
-                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Upgrade
-                                to Pro</a>
-                        </div> -->
+                       
                     </div>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -50,30 +47,31 @@ include_once 'database.php';
                     <div class="col-lg-8 col-xlg-9 col-md-12" style="margin-left:175px;">
                         <div class="card">
                             <div class="card-body">
-                                <form class="form-horizontal form-material" action="processReports.php" method="post"><!--                                     
+                                <form class="form-horizontal form-material" action="processEditassignment.php" method="post">
+                                <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
+                                    <input placeholder="Select start date" type="date" name="startDate" id="example" class="form-control" value="<?php echo $data['startDate']; ?>" required>
+                                    <label for="example">Start Date</label>
+                                    <i class="fas fa-calendar input-prefix" ></i>
+                                </div>
+                                <input name="id" type="text" value=<?php echo $data['assignmentnumber']?> hidden>
+                                <div class="md-form">
+                                    <input placeholder="Select start time" type="time" name="startTime" id="input_starttime" class="form-control timepicker" value="<?php echo $data['startTime']; ?>" required>
+                                    <label for="input_starttime">Start Time</label>
+                                    <i class="fas fa-clock input-prefix" ></i>
+                                </div>
+                                <div class="md-form">
+                                    <input placeholder="Select close time" name="endTime" type="time" id="input_closetime" class="form-control timepicker" value="<?php echo $data['endTime']; ?>" required>
+                                    <label for="input_closetime">Close Time</label>
+                                    <i class="fas fa-clock input-prefix" ></i>
+                                </div>                             
+                                                                   
+                
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">First Name</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" name="firstName" placeholder="Enter First Name"
-                                                class="form-control p-0 border-0"> </div>
-                                    </div> -->
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0" for ="assignments">Assignment</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                        <select name="assignments" id="assignments">
-                                        <?php
-                                                $query4 = "SELECT assignmentnumber FROM submittedassignment ";
-                                                $result4 = mysqli_query($conn , $query4);
-                                               $data = mysqli_fetch_array($result4);
-                                               
-                                                
-                                                ?>
-                                            <option value="" > <?php echo ""; ?> </option>
-
+                                        <div class="col-sm-12">
+                                            <input name="Update" type="submit" value="Update assignment" class="btn btn-success">
                                         </div>
-                                            
-                                    </div>                      
-                                    </form>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -107,6 +105,7 @@ include_once 'database.php';
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
+    
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
@@ -124,6 +123,4 @@ include_once 'database.php';
     <!--Custom JavaScript -->
     <script src="js/custom.js"></script>
 </body>
-
 </html>
-

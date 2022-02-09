@@ -43,18 +43,7 @@ include_once 'database.php';
                     
                 <!-- FEEDBACK MESSAGE -->
                 <!-- <div class="col-md-5"> -->
-                <?php 
-                    if(isset($_SESSION['regstatus']))
-                    {
-                        ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <?php echo $_SESSION['regstatus']; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php
-                         unset($_SESSION['regstatus']);
-                    }
-                ?>
+                
 <!-- </div> -->
 <!-- END OF FEEDBACK MESSAGE -->
                     
@@ -69,12 +58,7 @@ include_once 'database.php';
                                             <input type="text" name="userCode" placeholder="Enter pupil User Code"
                                                 class="form-control p-0 border-0"> </div>
                                     </div>
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Pupil Number</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" name="pupilNumber" placeholder="Enter Pupil Number"
-                                                class="form-control p-0 border-0"> </div>
-                                    </div>
+                                    
                                     <div class="form-group mb-4">
                                         <label class="col-md-12 p-0">First Name</label>
                                         <div class="col-md-12 border-bottom p-0">

@@ -188,6 +188,26 @@ include_once 'database.php';
                         <?php
                          unset($_SESSION['updatePupil']);
                     }
+                    if(isset($_SESSION['regstatus']))
+                    {
+                        ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?php echo $_SESSION['regstatus']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['regstatus']);
+                    }
+                    if(isset($_SESSION['changeStatus1']))
+                    {
+                        ?>
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <?php echo $_SESSION['changeStatus1']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['changeStatus1']);
+                    }
                 ?>
                 
                 </div>
@@ -196,46 +216,50 @@ include_once 'database.php';
                                 <table class="display cell-border" id="table_id">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="User Code" readonly="readonly"></th>
-                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Pupil Number" readonly="readonly"></th>
-                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="First Name" readonly="readonly"></th>
-                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Last Name" readonly="readonly"></th>
-                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Phone Number" readonly="readonly"></th>
-                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Activation Status" readonly="readonly"></th>
-                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Action" readonly="readonly"></th>
+                                            <th class="border-top-0" hidden><input type="text" class="search-input" placeholder="User Code" ></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="User Code" ></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="First Name"></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Last Name" ></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Phone Number" ></th>
+                                            <th class="border-top-0" hidden><input type="text" class="search-input" placeholder="Activation Status" ></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Activation Status" ></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="Action" ></th>
                                             <th class="border-top-0"><input type="text" class="search-input" placeholder="Edit details" readonly="readonly"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php 
-    $pupils = mysqli_query($conn,"select * from pupils"); 
-    while($data = mysqli_fetch_array($pupils))
-{
-?>  
+                                            $pupils = mysqli_query($conn,"select * from pupils"); 
+                                            while($data = mysqli_fetch_array($pupils))
+                                        {
+                                        ?>  
                                         <tr>
                                         <form action="changeStatus.php" method="post">
-                                            <td style="text-align:center;"><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
-                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['pupilNumber'];?></td>
+                                            <td style="text-align:center;" hidden ><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
+                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['userCode'];?></td>
                                             <td style="text-align:center;" class="txt-oflo"><?php echo $data['firstName'];?></td>                                            
                                             <td style="text-align:center;" class="txt-oflo"><?php echo $data['lastName'];?></td>
                                             <td style="text-align:center;"><?php echo $data['phoneNumber']; ?></td>
                                             <?php
                                                 if($data['activationStatus']== false){ ?>
-                                                    <td style="text-align:center;"><input type="text" style="color:red;" name="activationStatusD" class="no-outline" value="Deactivated" readonly="readonly"></td>
+                                                    <td style="text-align:center;" hidden><input type="text" style="color:red;" name="activationStatusD" class="no-outline" value="Deactivated" readonly="readonly"></td>
+                                                    <td style="text-align:center; color:red;">Deactivated</td>
                                             <?php } ?>
                                             <?php
                                                 if($data['activationStatus']== true){ ?>
-                                                    <td style="text-align:center;"><input type="text" name="activationStatusA" style="color:green;" class="no-outline" value="Activated" readonly="readonly"></td>
-                                            <?php } ?>
-          <?php if($data['activationStatus']== true){ ?>
-  <td style="text-align:center;"><input type="submit" name="changeA" class="btn btn-danger" value="Deactivate" style="margin-left:11px; color:white;"></td>
-  <?php } ?>
-  <?php if($data['activationStatus']== false){ ?>
-  <td></td>
-  <?php } ?>
-  <td style="text-align:center;"><a href="editPupil.php?id=<?php echo $data['pupilNumber']; ?>" ><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a></td>
+                                                <td style="text-align:center;" hidden><input type="text" name="activationStatusA" style="color:green;" class="no-outline" value="Activated" readonly="readonly"></td>
+                                                <td style="text-align:center; color:green;">Activated</td>
+                                                <?php } ?>
 
-</form>
+                                                <?php if($data['activationStatus']== true){ ?>
+                                                <td style="text-align:center;"><input type="submit" name="changeA" class="btn btn-danger" value="Deactivate" style="margin-left:11px; color:white;"></td>
+                                                <?php } ?>
+                                                <?php if($data['activationStatus']== false){ ?>
+                                                <td></td>
+                                                <?php } ?>
+                                                <td style="text-align:center;"><a href="editPupil.php?id=<?php echo $data['userCode']; ?>" ><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a></td>
+
+                                                </form>
                                         </tr>
                                         <?php
 }
@@ -249,6 +273,8 @@ include_once 'database.php';
 
         })
         </script>
+        
+        <script src="js/home.js"></script> 
                               
 <?php 
 mysqli_close($conn);?>

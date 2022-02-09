@@ -46,29 +46,67 @@ include_once 'database.php';
                                    
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                <?php 
+                    if(isset($_SESSION['delete']))
+                    {
+                        ?>
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <?php echo $_SESSION['delete']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['delete']);
+                    }   
+                    if(isset($_SESSION['updateAssignment']))
+                    {
+                        ?>
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <?php echo $_SESSION['updateAssignment']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['updateAssignment']);
+                    }  
+                    
+                    if(isset($_SESSION['status']))
+                    {
+                        ?>
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <?php echo $_SESSION['status']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                        unset($_SESSION['status']);
+                    }
+                        
+                   
+                ?>
+                
+                </div>
                             <div class="table-responsive">
                             <table class="display cell-border" id="table_id">
                                     <thead>
                                         <tr>
-                                        <th class="border-top-0" scope="col"><input type="text" class="search-input" placeholder="Assignment id" readonly="readonly"></th>
-                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Characters" readonly="readonly"></th>
-                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Start Date" readonly="readonly"></th>
-                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Start Time" readonly="readonly"></th>
-                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="End Time" readonly="readonly"></th>
-                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Number of Characters" readonly="readonly"></th>
-                                        <th scope="col" class="border-top-0"><input style="text-align:center;"  type="text" class="search-input" placeholder="Status" readonly="readonly"></th>
-                                        <th scope="col" class="border-top-0"><input style="text-align:center;"  type="text" class="search-input" placeholder="Edit" readonly="readonly"></th>
+                                        <th class="border-top-0" scope="col"><input type="text" class="search-input" placeholder="Assignment id" ></th>
+                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Characters" ></th>
+                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Start Date"></th>
+                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Start Time" ></th>
+                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="End Time"></th>
+                                        <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Number of Characters" ></th>
+                                        <th scope="col" class="border-top-0"><input style="text-align:center;"  type="text" class="search-input" placeholder="Status" ></th>
+                                        <th scope="col" class="border-top-0"><input style="text-align:center;"  type="text" class="search-input" placeholder="Edit" ></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php 
-                                        $assignments = mysqli_query($conn,"select * from submittedassignment"); 
+                                        $assignments = mysqli_query($conn,"select * from submittedassignment order by assignmentnumber DESC"); 
                                         while($data = mysqli_fetch_array($assignments))
                                         { 
                                             ?>
                                         <tr>
                                         <form action="" method="post">
-                                            <td style="text-align:center;"><input type="text" class="no-outline" name="assignmentnumber" value="<?php echo $data['assignmentnumber'];?>" readonly="readonly"></td>
+                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['assignmentnumber'];?></td>
                                             <td style="text-align:center;" class="txt-oflo"><?php echo $data['assignment'];?></td>
                                             <td style="text-align:center;" class="txt-oflo"><?php echo $data['startDate'];?></td>
                                             <td style="text-align:center;"><?php echo $data['startTime'];?></td>
@@ -76,35 +114,35 @@ include_once 'database.php';
                                             <td style="text-align:center;"><?php echo $data['numberOfCharacters'];?></td>
                                             <?php
                                                 $date = date('Y-m-d');
+                                                
                                                 if($date>$data['startDate']){ ?>
                                                     <td style="color:red; text-align:center;"><?php echo "Closed" ;?></td>
                                                     <?php
                                                 }
-                                                if($date<$data['startDate']){ ?>
+                                                else if($date<$data['startDate']){ ?>
                                                 <td style="color:green; text-align:center;"><?php echo "Not open for attempting" ;?></td>
                                                 <?php
-                                            }
+                                            }else{
                                                 $time= date('H:i:s'); 
-                                                if($date==$data['startDate']){
-                                                    if(($time>= $data['startTime']) && ($time < $data['endTime'])){?>
-                                                        <td style="color:green; text-align:center;"><?php echo "Open"; ?></td>
+                                                
+                                                if(($time >= $data['startTime']) && ($time < $data['endTime'])){?>
+                                                    <td style="color:green; text-align:center;"><?php echo "Open"; ?></td>
 
-                                                        <?php  }
-                                                    else{ 
-                                                    if($time < $data['startTime']){?>
-                                                        <td style="color:green; text-align:center;"><?php echo "Not open for attempting" ?></td>
-                                                        <?php
-                                                            }  
-                                                            else{ ?>
-                                                            <td style="color:red; text-align:center;"><?php echo "closed" ?></td> <?php
-                                                            }
-                                                                                            
-                                                            }
-                                                        
-                                                    }
+                                                    <?php  }
+                                                else if($time < $data['startTime']){?>
+                                                    <td style="color:green; text-align:center;"><?php echo "Not open for attempting" ?></td>
+                                                    <?php
+                                                        }  
+                                                        else{ ?>
+                                                        <td style="color:red; text-align:center;"><?php echo "closed" ?></td> <?php
+                                                        }
+                                                                                        
+                                            }
 
-                                                        ?>       
-                                                    <td style="text-align:center;"><a href="#"><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a></td>
+                                                    ?> 
+                                                
+                                                    
+                                                    <td style="text-align:center;"><a href="editAssignment.php?id=<?php echo $data['assignmentnumber'];?>"><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a>         <a href="deleteAssignment.php?id=<?php echo $data['assignmentnumber'];?>"><i class="fas fa-trash-alt" aria-hidden = "true"></i>Delete</a></td>
                                                     </tr>
                                                     <?php
                                                 }
@@ -113,10 +151,14 @@ include_once 'database.php';
                                                                                 </table>
                                                                                 <script>
                                                         $(document).ready(function(){
-                                                            $('.display').DataTable();
+                                                                        $('.display').DataTable({
+                                                                                "order": [[ 0, "desc" ]]
+                                                                            });
 
                                                         })
                                                         </script>
+                                                        <script src="js/home.js"></script> 
+    
                                                 <?php 
                                                     mysqli_close($conn);
                                                 ?>

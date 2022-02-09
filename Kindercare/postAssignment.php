@@ -20,11 +20,11 @@ if(isset($_POST['submit']))
 	 VALUES ('$teacherNumber','$char','$startDate','$startTime','$endTime','$numberOfCharacters')";
 	 if (mysqli_query($conn, $sql)) {
 		$_SESSION['status'] = "Assignment submitted successfully";
-        header("Location: addassignment.php");
+        header("Location: assignments.php");
 	 } 
      else {
         $_SESSION['status'] = "Failed to add assignment, please try again.";
-        header("Location: addassignment.php");
+        header("Location: assignments.php");
 	 }
 	 mysqli_close($conn);
     

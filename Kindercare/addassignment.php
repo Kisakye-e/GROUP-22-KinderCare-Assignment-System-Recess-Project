@@ -45,20 +45,7 @@ td{
                                 <h3 class="box-title mb-0">Select characters to add to the assignment(select not less than 1 and not more than 8 characters)</h3>
                                
                             </div>
-                            <div class="col-md-12">
-                                            <?php 
-                                                if(isset($_SESSION['status']))
-                                                {
-                                                    ?>
-                                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                                        <?php echo $_SESSION['status']; ?>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                        </div>
-                                                    <?php
-                                                    unset($_SESSION['status']);
-                                                }
-                                            ?>
-                            </div>
+                            
                             <div class="table-responsive">
                             <form action = "postAssignment.php" method="POST">
                                 <table class="table no-wrap">
@@ -143,8 +130,7 @@ td{
                                         </div>
                                     </div>
 
-                                <!-- <p>Start Date &emsp;<input type="Date" name="startD">&emsp;&emsp;Start time&emsp;<input type="time" name="startT"></p></br></br> 
-                                <p>Close time &emsp;<input type="time" name="closeT">&emsp;&emsp; <button onclick="printChar()" name="submit" class="btn btn-success" type="submit" style="color:white;">Submit Assignment</button> -->
+                                
                             </form>
 
                             </div>

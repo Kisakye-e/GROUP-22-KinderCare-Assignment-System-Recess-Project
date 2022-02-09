@@ -48,48 +48,37 @@ include_once 'database.php';
                                 </div>
                             </div>
                             <div class="col-md-12">
-                <?php 
-                    if(isset($_SESSION['changeStatus1']))
-                    {
-                        ?>
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                            <?php echo $_SESSION['changeStatus1']; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php
-                         unset($_SESSION['changeStatus1']);
-                    }
-                ?>
+               
 </div>
                             <div class="table-responsive">
                                 <table class="display cell-border" id="table_id">
                                     <thead>
                                         <tr>
-                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="User Code" readonly="readonly"></th>
-                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="Pupil Number" readonly="readonly"></th>
-                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="First Name" readonly="readonly"></th>
-                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="Last Name" readonly="readonly"></th>
-                                            <th style="text-align:center;"  class="border-top-0"><input type="text" class="search-input" placeholder="Phone Number" readonly="readonly"></th>
-                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="Activation Status" readonly="readonly"></th>
-                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="Action" readonly="readonly"></th>
+                                            <th style="text-align:center;" class="border-top-0" hidden><input type="text" class="search-input" placeholder="User Code" ></th>
+                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="User Code" ></th>                                            
+                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="First Name" ></th>
+                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="Last Name" ></th>
+                                            <th style="text-align:center;"  class="border-top-0"><input type="text" class="search-input" placeholder="Phone Number" ></th>
+                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="Activation Status" ></th>
+                                            <th style="text-align:center;" class="border-top-0"><input type="text" class="search-input" placeholder="Action"></th>
                          
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php 
- $query4 = "SELECT * FROM pupils WHERE requestStatus = 'Pending'";
- $result4 = mysqli_query($conn , $query4);
-    while($data = mysqli_fetch_array($result4))
-{
-?>
+                                        $query4 = "SELECT * FROM pupils WHERE requestStatus = 'Pending'";
+                                        $result4 = mysqli_query($conn , $query4);
+                                            while($data = mysqli_fetch_array($result4))
+                                        {
+                                        ?>
                                         <tr>
                                         <form action="changeStatus1.php" method="post">
-                                            <td style="text-align:center;"><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
-                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['pupilNumber'];?></td>
+                                            <td style="text-align:center;" hidden><input type="text" class="no-outline" name="userCode" value="<?php echo $data['userCode']; ?>" readonly="readonly"></td>
+                                            <td style="text-align:center;" class="txt-oflo"><?php echo $data['userCode']; ?></td>                                            
                                             <td style="text-align:center;" class="txt-oflo"><?php echo $data['firstName'];?></td>
                                             <td style="text-align:center;" class="txt-oflo"><?php echo $data['lastName'];?></td>
                                             <td style="text-align:center;"><?php echo $data['phoneNumber']; ?></td>
-                                            <td style="text-align:center;"><input type="text" name="activationStatus" style="color:red;" value="Deactivated" class="no-outline" readonly="readonly"></td>
+                                            <td style="text-align:center; color:red;">Deactivated</td>
                                             <td style="text-align:center;"><input type="submit" name="change" class="btn btn-success" value="Activate" style="margin-left:11px; color:white;"></td>
 </form>
                                         </tr>
@@ -105,6 +94,7 @@ include_once 'database.php';
 
         })
         </script>
+        <script src="js/home.js"></script> 
 <?php 
 mysqli_close($conn);?>
                             </div>
