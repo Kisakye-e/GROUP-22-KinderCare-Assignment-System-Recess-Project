@@ -154,14 +154,14 @@ if(isset($_POST['save']))
 	 $teacherNumber = $_POST['teacherNumber'];
 	 $firstName = $_POST['firstName'];
 	 $lastName = $_POST['lastName'];
-	 $password = $_POST['password'];
+	 $password = md5($_POST['password']);
 	
 	
 	$sql = "INSERT INTO teachers (emailAddress,teacherNumber,firstName,lastName,password)
 	 VALUES ('$emailAddress','$teacherNumber','$firstName','$lastName','$password')";
 	 if (mysqli_query($conn, $sql)) {
     $_SESSION['regTr']="Registration successful";
-    header("Location:registerTeacher.php"); 
+    header("Location:index.php"); 
 		// echo "New record created successfully !";
 		// header("Location: index.php"); 
 

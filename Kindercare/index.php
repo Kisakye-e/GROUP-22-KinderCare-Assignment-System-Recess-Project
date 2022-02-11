@@ -132,7 +132,7 @@ include "database.php";
 if(isset($_POST['submit'])){
 
     $teacherNumber = mysqli_real_escape_string($conn,$_POST['teacherNumber']);
-    $password = mysqli_real_escape_string($conn,$_POST['password']);
+    $password = mysqli_real_escape_string($conn,md5($_POST['password']));
 
     if ($teacherNumber != "" && $password != ""){
 
