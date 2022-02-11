@@ -107,16 +107,7 @@ body {
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="password" class="form-control" placeholder="Password" required>
       <?php 
-                    if(isset($_SESSION['regTr']))
-                    {
-                        ?>
-                            <div class="alert alert-primary alert-dismissible fade show" style="text-align:left;"role="alert">
-                            <?php echo $_SESSION['regTr']; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php
-                         unset($_SESSION['regTr']);
-                    }
+                    
                     if(isset($_SESSION['regTr2']))
                     {
                         ?>
@@ -158,16 +149,23 @@ if(isset($_POST['save']))
 	
 	
 	$sql = "INSERT INTO teachers (emailAddress,teacherNumber,firstName,lastName,password)
-	 VALUES ('$emailAddress','$teacherNumber','$firstName','$lastName','$password')";
+	 VALUES ('$emailAddress','$teacherNumber','$firstName','$lastName','$password')"; 
 	 if (mysqli_query($conn, $sql)) {
+<<<<<<< Updated upstream
     $_SESSION['regTr']="Registration successful";
     header("Location:index.php"); 
 		// echo "New record created successfully !";
 		// header("Location: index.php"); 
+=======
+    $_SESSION['regTr']="Registration successful,please sign in here";
+    header("Location:index.php"); 
+		
+>>>>>>> Stashed changes
 
 	 } else {
 		$_SESSION['regTr2']="Failed to register, please try again.";
-    header("Location:registerTeacher.php"); }
+    header("Location:registerTeacher.php"); 
+  }
 
 	 mysqli_close($conn);
    ob_end_flush();

@@ -108,8 +108,9 @@ include_once 'database.php';
                                                 </table>
                                                    <script>
                                                         $(document).ready(function(){
-                                                            $('.display').DataTable();
-
+                                                                        $('.display').DataTable({
+                                                                                "order": [[ 0, "desc" ]]
+                                                                            });
                                                         })
                                              
                                                         </script>
@@ -147,6 +148,7 @@ include_once 'database.php';
     <!-- ============================================================== -->
     <!-- ============================================================== -->  
     <script src= "js/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <script src= "js/bootstrap.min.js"></script>
     <script src= "js/datatables.min.js"></script> 
 </body>

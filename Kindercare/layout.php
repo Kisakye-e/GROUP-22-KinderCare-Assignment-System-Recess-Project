@@ -12,7 +12,7 @@ date_default_timezone_set('Africa/Kampala');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KinderCare Education Centre|Assignment Management System</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-96x96.png">
     <link rel="manifest" href="favicon/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
@@ -20,8 +20,10 @@ date_default_timezone_set('Africa/Kampala');
     <!-- Custom CSS -->
     <link href="plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
     <link rel="stylesheet" href="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    
     <!-- Custom CSS -->
-    <link href="css/style.min.css" rel="stylesheet">    
+    <link href="css/style.min.css" rel="stylesheet">
+        
     <style>
         .no-outline{
         outline: none;

@@ -33,9 +33,13 @@ include_once 'database.php';
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Three charts -->
+                <!-- ============================================================== -->
+                
                 
               <!-- ============================================================== -->
-                <!-- ACTIVATION REQUESTS -->
+               
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12">
@@ -100,6 +104,9 @@ include_once 'database.php';
                                     </thead>
                                     <tbody>
                                     <?php 
+                                    $closed = 0;
+                                    $open = 0;
+                                    $notOpen = 0;
                                         $assignments = mysqli_query($conn,"select * from submittedassignment order by assignmentnumber DESC"); 
                                         while($data = mysqli_fetch_array($assignments))
                                         { 
@@ -113,28 +120,35 @@ include_once 'database.php';
                                             <td style="text-align:center;"><?php echo $data['endTime'];?></td>
                                             <td style="text-align:center;"><?php echo $data['numberOfCharacters'];?></td>
                                             <?php
+                                                
                                                 $date = date('Y-m-d');
                                                 
                                                 if($date>$data['startDate']){ ?>
-                                                    <td style="color:red; text-align:center;"><?php echo "Closed" ;?></td>
+                                                    <td style="color:red; text-align:center;"><?php echo "Closed" ;?></td>                                                    
                                                     <?php
+                                                    $closed +=1;
                                                 }
                                                 else if($date<$data['startDate']){ ?>
                                                 <td style="color:green; text-align:center;"><?php echo "Not open for attempting" ;?></td>
                                                 <?php
+                                                $notOpen += 1;
                                             }else{
                                                 $time= date('H:i:s'); 
                                                 
                                                 if(($time >= $data['startTime']) && ($time < $data['endTime'])){?>
                                                     <td style="color:green; text-align:center;"><?php echo "Open"; ?></td>
 
-                                                    <?php  }
+                                                    <?php
+                                                    $open +=1;
+                                                }
                                                 else if($time < $data['startTime']){?>
                                                     <td style="color:green; text-align:center;"><?php echo "Not open for attempting" ?></td>
                                                     <?php
+                                                     $notOpen += 1;
                                                         }  
                                                         else{ ?>
-                                                        <td style="color:red; text-align:center;"><?php echo "closed" ?></td> <?php
+                                                        <td style="color:red; text-align:center;"><?php echo "Closed" ?></td> <?php
+                                                        $closed +=1;
                                                         }
                                                                                         
                                             }
@@ -149,6 +163,7 @@ include_once 'database.php';
                                                 ?>
                                                 </tbody>
                                                                                 </table>
+                                                                               
                                                                                 <script>
                                                         $(document).ready(function(){
                                                                         $('.display').DataTable({
@@ -166,9 +181,64 @@ include_once 'database.php';
                         </div>
                     </div>
                 </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Total Assignments</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash"><i class="fa fa-chart-bar fa-3x" aria-hidden="true"></i>
+                                    </div>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-success"><strong><?php echo $open + $notOpen + $closed; ?></strong></span></li>         
+            
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Not Open</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash2"><i class="fa fa-chart-bar fa-3x" aria-hidden="true"></i>
+                                    </div>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-purple"><strong><?php echo $notOpen; ?></strong></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Open</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash3"><i class="fa fa-chart-bar fa-3x" aria-hidden="true"></i>
+                                    </div>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-info"><strong><?php echo $open; ?></strong></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Closed </h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                            <li>
+                                    <div id="sparklinedash4"><i class="fa fa-chart-bar fa-3x" aria-hidden="true"></i>
+                                    </div>
+                                </li>                               
+                                <li class="ms-auto"><span class="counter text-info"><strong><?php echo $closed; ?></strong></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                                
                 <!-- ============================================================== -->
                 <!-- Recent Comments -->
                 <!-- ============================================================== -->
+
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -176,7 +246,7 @@ include_once 'database.php';
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer text-center"> 2022 © KINDERCARE EDUCATION SERVICES                     
+            <footer class="footer text-center"> 2022 © KINDERCARE EDUCATION SERVICES          
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

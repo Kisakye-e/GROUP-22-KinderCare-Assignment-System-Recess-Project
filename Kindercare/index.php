@@ -103,6 +103,16 @@ body {
                         <?php
                          unset($_SESSION['signin']);
                     }
+                    if(isset($_SESSION['regTr']))
+                    {
+                        ?>
+                            <div class="alert alert-primary alert-dismissible fade show" style="text-align:left;"role="alert">
+                            <?php echo $_SESSION['regTr']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['regTr']);
+                    }
                 ?>  
  
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -143,8 +153,7 @@ if(isset($_POST['submit'])){
         $count = $row['cntUser'];
         
         if($count > 0){
-            $_SESSION['teacherNumber'] = $teacherNumber;
-            
+            $_SESSION['teacherNumber'] = $teacherNumber;            
             header('Location: home.php');
         }else{
           $_SESSION['signin']="Invalid teacher number or password";
