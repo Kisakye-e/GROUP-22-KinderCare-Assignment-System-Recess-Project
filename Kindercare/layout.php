@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['teacherNumber']))
+    {
+       
+        $_SESSION['firstlogin'] = "Please Sign in here.";
+        header('Location: index.php');
+    }
 include_once 'database.php';
 date_default_timezone_set('Africa/Kampala');
 ?>

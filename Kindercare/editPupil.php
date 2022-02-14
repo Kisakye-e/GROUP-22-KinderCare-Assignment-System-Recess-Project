@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include_once 'layout.php'; 
     $id =$_GET['id'];  
     $queryE = "SELECT * FROM pupils where userCode = '$id'";

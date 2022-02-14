@@ -93,6 +93,16 @@ body {
       <!-- <img class="mb-3" src="img/logo Icon.png" alt="Logo" > -->
       <img class="mb-3" src="img/logo-text (2).png" alt="Logo" width="110px" height="70px">
                 <?php 
+                    if(isset($_SESSION['firstlogin']))
+                    {
+                        ?>
+                            <div class="alert alert-primary alert-dismissible fade show" style="text-align:left;"role="alert">
+                            <?php echo $_SESSION['firstlogin']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                         unset($_SESSION['firstlogin']);
+                    }
                     if(isset($_SESSION['signin']))
                     {
                         ?>

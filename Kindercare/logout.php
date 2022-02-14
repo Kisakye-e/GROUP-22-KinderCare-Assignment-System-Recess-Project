@@ -2,6 +2,7 @@
 
 <?php
     session_start();
+    unset($_SESSION["teacherNumber"]);
     unset($_SESSION["emailAddress"]);
     unset($_SESSION["firstName"]);
     header("Location:index.php");

@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include_once 'layout.php';
 include_once 'database.php';
  ?>
@@ -115,10 +115,10 @@ include_once 'database.php';
                                             </td>
 
                                             <td>
-                                                <?php 
-                                                
-                                                // echo $_SESSION['closed'];
-                                                echo ($_SESSION["closed"] - mysqli_num_rows($results)); ?>
+                                                <?php                                                
+                                               
+                                                echo ($_SESSION["closed"] - mysqli_num_rows($results));
+                                                 ?>
                                               
                                             </td>
                                             <td>

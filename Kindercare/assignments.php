@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include_once 'layout.php';
 include_once 'database.php';
  ?>
@@ -232,9 +232,8 @@ include_once 'database.php';
                                 </li>                               
                                 <li class="ms-auto"><span class="counter text-info"><strong><?php echo $closed; ?></strong></span>
                                 </li>
-                                <?php $_SESSION['closed']= $closed;
-
-                                
+                                <?php 
+                                $_SESSION['closed']= $closed;                               
                                 
                                 ?>
                             </ul>
