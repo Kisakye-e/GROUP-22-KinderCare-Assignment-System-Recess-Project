@@ -143,7 +143,22 @@ include_once 'database.php';
                                         options: {
                                             scales: {
                                                 y: {
+                                                    title:{
+                                                display:true,
+                                                text: 'Marks',
+                                                fontsize: 25
+
+                                            },
+                                                    
                                                     beginAtZero: true
+                                                },
+                                                x:{
+                                                    title:{
+                                                display:true,
+                                                text: 'Assignment Number',
+                                                fontsize: 25}
+
+
                                                 }
                                             }
                                         }
@@ -192,14 +207,25 @@ include_once 'database.php';
                                         options: {
                                             scales: {
                                                 y: {
+                                                    title:{
+                                                display:true,
+                                                text: 'Number of attempts',
+                                                fontsize: 25
+
+                                            },
+
                                                     beginAtZero: true
+                                                },
+                                                x:{
+                                                    title:{
+                                                display:true,
+                                                text: 'Assignment Number',
+                                                fontsize: 25}
+
+
                                                 }
                                             },
-                                            title:{
-                                                display:true,
-                                                text: 'Line graph showing number of attempts per assignment',
-                                                fontsize: 25
-                                            },
+                                            
                                             layout:{
                                                 padding:{
                                                     left:50,
@@ -255,7 +281,21 @@ include_once 'database.php';
                                         options: {
                                             scales: {
                                                 y: {
+                                                    title:{
+                                                display:true,
+                                                text: 'Average Score',
+                                                fontsize: 25
+
+                                            },
                                                     beginAtZero: true
+                                                },
+                                                x:{
+                                                    title:{
+                                                display:true,
+                                                text: 'Assignment Number',
+                                                fontsize: 25}
+
+
                                                 }
                                             }
                                         }

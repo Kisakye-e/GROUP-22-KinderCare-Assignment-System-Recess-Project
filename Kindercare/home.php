@@ -217,7 +217,7 @@ include_once 'database.php';
                 </div>
 
                             <div class="table-responsive" >
-                                <table class="display cell-border" id="table_id">
+                                <table class="display cell-border" id="table_id" >
                                     <thead>
                                         <tr>
                                             <th class="border-top-0" hidden><input type="text" class="search-input" placeholder="User Code" ></th>
@@ -296,6 +296,7 @@ include_once 'database.php';
                                         },
                                         {
                                             extend: 'pdfHtml5',
+                                            title: 'Registered pupils',
                                             exportOptions:{
                                                 columns: [0,1,2,3,4]
                                             }
