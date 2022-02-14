@@ -7,6 +7,8 @@ include_once 'database.php';
 <!-- Data tables css -->
     <link href="css/bootstrap.min.css"rel="stylesheet">
     <link href="css/datatables.min.css" rel="stylesheet">
+    <script src= "js/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <div class="page-wrapper">
@@ -198,8 +200,43 @@ include_once 'database.php';
                                 
                                 <script>
                                     $(document).ready(function(){
-                                        $('.display').DataTable();
-                                            })
+                                        $('.display').DataTable(
+                                            {
+                                     "order": [[ 1, "asc" ]],
+                                    'destroy': false,
+                                    dom: 'Bfrtip',
+                                    buttons: [
+                                        {
+                                            extend: 'copyHtml5',footer: true,
+                                            exportOptions:{
+                                                columns: [0,1,2,3]
+                                            }
+                                        },
+                                        {
+                                            extend: 'excelHtml5',footer: true,
+                                            exportOptions:{
+                                                columns: [0,1,2,3]
+                                            }
+                                        },
+                                        {
+                                            extend: 'pdfHtml5',footer: true,
+                                            exportOptions:{
+                                                columns: [0,1,2,3]
+                                            }
+                                        },
+                                        {
+                                            extend: 'csvHtml5',footer: true,
+                                            exportOptions:{
+                                                columns: [0,1,2,3]
+                                            }
+                                        }
+
+                                    ]
+                                }
+
+
+                                        );
+                                            });
                                     </script>
                                     <script src="js/home.js"></script>
                                                     
@@ -235,7 +272,6 @@ include_once 'database.php';
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->  
-    <script src= "js/jquery-3.6.0.min.js"></script>
     <script src= "js/bootstrap.min.js"></script>
     <script src= "js/datatables.min.js"></script> 
 </body>

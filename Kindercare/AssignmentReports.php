@@ -107,8 +107,7 @@ $id =$_GET['id'];
                                             <td>
                                             <?php echo $attempts; ?>
 
-                                            </td>
-                                                
+                                            </td>                                                
 
                                             </tr>
                                             <tr>
@@ -117,9 +116,7 @@ $id =$_GET['id'];
                                             </td>
 
                                             <td>
-                                            <?php echo $_SESSION['totalP'] - $attempts; ?>
-
-                                            
+                                            <?php echo $_SESSION['totalP'] - $attempts; ?>                                            
 
                                             </td>
                                                 
@@ -204,7 +201,41 @@ $id =$_GET['id'];
                                 </table>
                                 <script>
         $(document).ready(function(){
-            $('.display').DataTable();
+            $('.display').DataTable(
+
+                {
+                                     "order": [[ 1, "asc" ]],
+                                    'destroy': false,
+                                    dom: 'Bfrtip',
+                                    buttons: [
+                                        {
+                                            extend: 'copyHtml5',footer: true,
+                                            exportOptions:{
+                                                columns: [0,1,2,3,4]
+                                            }
+                                        },
+                                        {
+                                            extend: 'excelHtml5',footer: true,
+                                            exportOptions:{
+                                                columns: [0,1,2,3,4]
+                                            }
+                                        },
+                                        {
+                                            extend: 'pdfHtml5',footer: true,
+                                            exportOptions:{
+                                                columns: [0,1,2,3,4]
+                                            }
+                                        },
+                                        {
+                                            extend: 'csvHtml5',footer: true,
+                                            exportOptions:{
+                                                columns: [0,1,2,3,4]
+                                            }
+                                        }
+
+                                    ]
+                                }
+            );
                    })
         </script>
         <script src="js/home.js"></script>             
@@ -254,7 +285,3 @@ $id =$_GET['id'];
 
 
 
-<!-- SELECT COUNT(userCode) from attemptedassignment WHERE score <=50;  -->
-<!-- SELECT COUNT(userCode) from attemptedassignment WHERE score BETWEEN 50 AND 71;  -->
-<!-- SELECT COUNT(userCode) from attemptedassignment WHERE score BETWEEN 71 AND 80;  -->
-<!-- SELECT COUNT(userCode) from attemptedassignment WHERE score >79;  -->

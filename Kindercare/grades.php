@@ -79,7 +79,7 @@ include_once 'database.php';
                                     </thead>
                                     <tbody>
                                     <?php 
-                                    // The inner join party.....................
+                         
                                         $sql = "SELECT * FROM attemptedassignment INNER JOIN pupils ON attemptedassignment.userCode = pupils.userCode";
                                         $result = mysqli_query($conn, $sql);
                                         if(mysqli_num_rows($result)>0){                                            
@@ -108,9 +108,43 @@ include_once 'database.php';
                                                 </table>
                                                    <script>
                                                         $(document).ready(function(){
-                                                                        $('.display').DataTable({
-                                                                                "order": [[ 0, "desc" ]]
-                                                                            });
+                                                                        $('.display').DataTable(
+                                                                            {
+                                                                                "order": [[ 0, "desc" ]],
+                                                                                'destroy': false,
+                                                                                dom: 'Bfrtip',
+                                                                                buttons: [
+                                                                                    {
+                                                                                        extend: 'copyHtml5',
+                                                                                        exportOptions:{
+                                                                                            columns: [0,1,2,3,4,5]
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        extend: 'excelHtml5',
+                                                                                        exportOptions:{
+                                                                                            columns: [0,1,2,3,4,5]
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        extend: 'pdfHtml5',
+                                                                                        exportOptions:{
+                                                                                            columns: [0,1,2,3,4,5]
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        extend: 'csvHtml5',
+                                                                                        exportOptions:{
+                                                                                            columns: [0,1,2,3,4,5]
+                                                                                        }
+                                                                                    }
+
+                                                                                ]
+                                                                            }
+                                                                            
+                                                                            );
+
+
                                                         })
                                              
                                                         </script>

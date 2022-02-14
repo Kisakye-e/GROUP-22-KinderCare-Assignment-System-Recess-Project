@@ -49,10 +49,6 @@ date_default_timezone_set('Africa/Kampala');
     </style>
    
 <script>
-    //Data Tables script
-    $(document).ready( function () {
-    $('#table_id').DataTable();
-    } );
 
     function printChar() {
                var items = document.getElementsByName("character[]");

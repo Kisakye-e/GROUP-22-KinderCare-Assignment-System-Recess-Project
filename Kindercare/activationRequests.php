@@ -90,7 +90,40 @@ include_once 'database.php';
                                 </table>
                                 <script>
         $(document).ready(function(){
-            $('.display').DataTable();
+            $('.display').DataTable(
+                {
+                                    "order": [[ 1, "asc" ]],
+                                    'destroy': false,
+                                    dom: 'Bfrtip',
+                                    buttons: [
+                                        {
+                                            extend: 'copyHtml5',
+                                            exportOptions:{
+                                                columns: [0,1,2,3,4]
+                                            }
+                                        },
+                                        {
+                                            extend: 'excelHtml5',
+                                            exportOptions:{
+                                                columns: [0,1,2,3,4]
+                                            }
+                                        },
+                                        {
+                                            extend: 'pdfHtml5',
+                                            exportOptions:{
+                                                columns: [0,1,2,3,4]
+                                            }
+                                        },
+                                        {
+                                            extend: 'csvHtml5',
+                                            exportOptions:{
+                                                columns: [0,1,2,3,4]
+                                            }
+                                        }
+
+                                    ]
+                                }
+            );
                    })
         </script>
         <script src="js/home.js"></script> 

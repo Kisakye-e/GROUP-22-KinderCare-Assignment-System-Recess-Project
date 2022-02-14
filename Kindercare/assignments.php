@@ -169,7 +169,36 @@ include_once 'database.php';
                                                                                 <script>
                                                         $(document).ready(function(){
                                                                         $('.display').DataTable({
-                                                                                "order": [[ 0, "desc" ]]
+                                                                                "order": [[ 0, "desc" ]],
+                                                                                'destroy': false,
+                                                                                dom: 'Bfrtip',
+                                                                                buttons: [
+                                                                                    {
+                                                                                        extend: 'copyHtml5',
+                                                                                        exportOptions:{
+                                                                                            columns: [0,1,2,3,4,5,6]
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        extend: 'excelHtml5',
+                                                                                        exportOptions:{
+                                                                                            columns: [0,1,2,3,4,5,6]
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        extend: 'pdfHtml5',
+                                                                                        exportOptions:{
+                                                                                            columns: [0,1,2,3,4,5,6]
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        extend: 'csvHtml5',
+                                                                                        exportOptions:{
+                                                                                            columns: [0,1,2,3,4,5,6]
+                                                                                        }
+                                                                                    }
+
+                                                                                ]
                                                                             });
 
                                                         })
