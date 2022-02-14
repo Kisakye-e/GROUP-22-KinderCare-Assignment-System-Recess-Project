@@ -6,8 +6,11 @@ include_once 'database.php';
 <head>  
 
 <!-- Data tables css -->
+
     <link href="css/bootstrap.min.css"rel="stylesheet">
     <link href="css/datatables.min.css" rel="stylesheet">
+
+
     <style>
         #sparklinedash{
             display: flex;
@@ -83,6 +86,7 @@ include_once 'database.php';
             $query = "SELECT * FROM pupils";
             $result = mysqli_query($conn , $query);
             $regPupils = mysqli_num_rows($result);
+            $_SESSION['totalP']=$regPupils;
             echo $regPupils;?>
 
                                 </span></li>
@@ -225,6 +229,7 @@ include_once 'database.php';
                                             <th class="border-top-0"><input type="text" class="search-input" placeholder="Activation Status" ></th>
                                             <th class="border-top-0"><input type="text" class="search-input" placeholder="Action" ></th>
                                             <th class="border-top-0"><input type="text" class="search-input" placeholder="Edit details" readonly="readonly"></th>
+                                            <th class="border-top-0"><input type="text" class="search-input" placeholder="View Report" readonly="readonly"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -258,6 +263,7 @@ include_once 'database.php';
                                                 <td></td>
                                                 <?php } ?>
                                                 <td style="text-align:center;"><a href="editPupil.php?id=<?php echo $data['userCode']; ?>" ><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a></td>
+                                                <td style="text-align:center;"><a href="pupilReports.php?id=<?php echo $data['userCode']; ?>" ><i class="fas fa-file-alt" aria-hidden = "true"></i>View Report</a></td>
 
                                                 </form>
                                         </tr>
@@ -267,12 +273,14 @@ include_once 'database.php';
                                         
                                     </tbody>
                                 </table>
-    <script>
-        $(document).ready(function(){
-            $('.display').DataTable();           
 
-        })
-        </script>
+                        <script>
+                            $(document).ready(function(){
+                                $('.display').DataTable();           
+
+                            })
+                            </script>
+        
         
         <script src="js/home.js"></script> 
                               

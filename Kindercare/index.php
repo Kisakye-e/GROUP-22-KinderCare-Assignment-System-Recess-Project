@@ -146,11 +146,13 @@ if(isset($_POST['submit'])){
 
     if ($teacherNumber != "" && $password != ""){
 
-        $sql_query = "select count(*) as cntUser from teachers where teacherNumber='".$teacherNumber."' and password='".$password."'";
+        $sql_query = "select count(*) as cntUser,firstName,lastName from teachers where teacherNumber='".$teacherNumber."' and password='".$password."'";
         $result = mysqli_query($conn,$sql_query);
         $row = mysqli_fetch_array($result);
 
         $count = $row['cntUser'];
+        $_SESSION['first'] = $row['firstName'];
+        $_SESSION['last'] = $row['lastName'];
         
         if($count > 0){
             $_SESSION['teacherNumber'] = $teacherNumber;            

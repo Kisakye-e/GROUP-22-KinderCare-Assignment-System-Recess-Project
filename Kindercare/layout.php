@@ -131,8 +131,10 @@ date_default_timezone_set('Africa/Kampala');
                         <li>
                             <a class="profile-pic" href="#">
                                 <img src="img\avatar.png" alt="user-img" width="36"
+
+
                                 
-                                    class="img-circle"><span class="text-white font-medium"><?php echo $_SESSION["teacherNumber"];?></span></a>
+                                    class="img-circle"><span class="text-white font-medium"><?php echo $_SESSION['first']." ".$_SESSION['last'];?></span></a>                                    
                                     
                         </li>
                         <!-- ============================================================== -->
@@ -201,7 +203,7 @@ date_default_timezone_set('Africa/Kampala');
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="assignmentActivity.php"
                                 aria-expanded="false">
                                 <i class="fa fa-chart-bar" aria-hidden="true"></i>
-                                <span class="hide-menu">Reports</span>
+                                <span class="hide-menu">General Reports</span>
                             </a>
                         </li>
                         <li class="sidebar-item">

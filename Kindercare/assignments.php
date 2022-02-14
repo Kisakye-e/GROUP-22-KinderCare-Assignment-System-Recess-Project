@@ -100,6 +100,7 @@ include_once 'database.php';
                                         <th scope="col" class="border-top-0"><input type="text" class="search-input" placeholder="Number of Characters" ></th>
                                         <th scope="col" class="border-top-0"><input style="text-align:center;"  type="text" class="search-input" placeholder="Status" ></th>
                                         <th scope="col" class="border-top-0"><input style="text-align:center;"  type="text" class="search-input" placeholder="Edit" ></th>
+                                        <th scope="col" class="border-top-0"><input style="text-align:center;"  type="text" class="search-input" placeholder="View Report" ></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -156,7 +157,8 @@ include_once 'database.php';
                                                     ?> 
                                                 
                                                     
-                                                    <td style="text-align:center;"><a href="editAssignment.php?id=<?php echo $data['assignmentnumber'];?>"><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a>         <a href="deleteAssignment.php?id=<?php echo $data['assignmentnumber'];?>"><i class="fas fa-trash-alt" aria-hidden = "true"></i>Delete</a></td>
+                                                    <td style="text-align:center;"><a href="editAssignment.php?id=<?php echo $data['assignmentnumber'];?>"><i class="fas fa-edit" aria-hidden = "true"></i>Edit</a>        <a href="deleteAssignment.php?id=<?php echo $data['assignmentnumber'];?>"><i class="fas fa-trash-alt" aria-hidden = "true"></i>Delete</a></td>
+                                                    <td style="text-align:center;"><a href="AssignmentReports.php?id=<?php echo $data['assignmentnumber']; ?>" ><i class="fas fa-file-alt" aria-hidden = "true"></i>View Report</a></td>
                                                     </tr>
                                                     <?php
                                                 }
@@ -230,6 +232,11 @@ include_once 'database.php';
                                 </li>                               
                                 <li class="ms-auto"><span class="counter text-info"><strong><?php echo $closed; ?></strong></span>
                                 </li>
+                                <?php $_SESSION['closed']= $closed;
+
+                                
+                                
+                                ?>
                             </ul>
                         </div>
                     </div>

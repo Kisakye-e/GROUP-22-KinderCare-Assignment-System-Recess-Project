@@ -91,8 +91,7 @@ include_once 'database.php';
                                 <script>
         $(document).ready(function(){
             $('.display').DataTable();
-
-        })
+                   })
         </script>
         <script src="js/home.js"></script> 
 <?php 
