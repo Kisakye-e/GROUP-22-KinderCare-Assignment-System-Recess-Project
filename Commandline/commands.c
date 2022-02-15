@@ -4,7 +4,7 @@
 #include<mysql.h>
 #include<string.h>
 #include<time.h>
-#include<stdbool.h>
+
  MYSQL *conn;
  MYSQL_RES *res;
  MYSQL_ROW row;
