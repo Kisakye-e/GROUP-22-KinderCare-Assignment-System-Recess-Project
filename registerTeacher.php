@@ -1,4 +1,4 @@
-<!doctype html>
+
 
 <?php
 ob_start();
@@ -6,6 +6,7 @@ session_start();
 include_once 'database.php';
 
 ?>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
