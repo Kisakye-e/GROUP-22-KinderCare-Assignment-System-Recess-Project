@@ -1,4 +1,4 @@
-<!doctype html>
+
 
 <?php
 ob_start();
@@ -6,6 +6,7 @@ session_start();
 include_once 'database.php';
 
 ?>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -97,15 +98,15 @@ body {
 
       <h1 class="h5 mb-3 font-weight-normal">Please Enter the following details.</h1>
       <label for="inputEmail"  class="sr-only">Email</label>
-      <input type="text" name="emailAddress"  class="form-control" placeholder="Enter Email Address" required autofocus>
+      <input type="email" name="emailAddress"  class="form-control" placeholder="Enter Email Address" required autofocus>
       <label for="inputTeacherNo" class="sr-only">Teacher Number</label>
-      <input type="text" name="teacherNumber" class="form-control" placeholder="Enter Teacher Number" required autofocus>
+      <input type="text" name="teacherNumber" class="form-control" placeholder="Enter Teacher Number" minlength="6" required autofocus>
       <label for="inputFirstName" class="sr-only">First Name</label>
-      <input type="text" name="firstName" class="form-control" placeholder="Enter First Name" required>
+      <input type="text" name="firstName" class="form-control" placeholder="Enter First Name" minlength="3" required>
       <label for="inputLastName" class="sr-only">Last Name</label>
-      <input type="text" name="lastName" class="form-control" placeholder="Enter Last Name" required>
+      <input type="text" name="lastName" class="form-control" placeholder="Enter Last Name" minlength="3" required>
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" name="password" class="form-control" placeholder="Password" required>
+      <input type="password" name="password" minlength="8" class="form-control" placeholder="Password" required>
       <?php 
                     
                     if(isset($_SESSION['regTr2']))
