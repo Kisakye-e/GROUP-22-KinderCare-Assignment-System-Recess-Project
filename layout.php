@@ -169,7 +169,7 @@ date_default_timezone_set('Africa/Kampala');
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="registerpupil.php"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="registerPupil.php"
                                 aria-expanded="false">
                                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                                 <span class="hide-menu">Register Pupil</span>
